@@ -1,0 +1,25 @@
+./generate_command.sh function list
+./generate_command.sh function create
+./generate_command.sh function get
+./generate_command.sh function update
+./generate_command.sh function delete
+./generate_command.sh function version
+./generate_command.sh function version-list
+./generate_command.sh function version-create
+./generate_command.sh function version-get
+./generate_command.sh function version-delete
+./generate_command.sh deployment create
+./generate_command.sh deployment get
+./generate_command.sh deployment update
+./generate_command.sh deployment delete
+./generate_command.sh invoke
+./generate_command.sh asset list
+./generate_command.sh asset create
+./generate_command.sh asset get
+./generate_command.sh asset delete
+./generate_command.sh auth login
+./generate_command.sh auth logout
+./generate_command.sh auth status
+./generate_command.sh queue list
+./generate_command.sh queue position
+./generate_command.sh cluster-group list
