@@ -48,6 +48,21 @@ const FunctionResponseFunctionStatusError = shared.FunctionResponseFunctionStatu
 const FunctionResponseFunctionStatusInactive = shared.FunctionResponseFunctionStatusInactive
     This is an alias to an internal value.
 
+const GetQueuesResponseQueuesFunctionStatusActive = shared.GetQueuesResponseQueuesFunctionStatusActive
+    This is an alias to an internal value.
+
+const GetQueuesResponseQueuesFunctionStatusDeleted = shared.GetQueuesResponseQueuesFunctionStatusDeleted
+    This is an alias to an internal value.
+
+const GetQueuesResponseQueuesFunctionStatusDeploying = shared.GetQueuesResponseQueuesFunctionStatusDeploying
+    This is an alias to an internal value.
+
+const GetQueuesResponseQueuesFunctionStatusError = shared.GetQueuesResponseQueuesFunctionStatusError
+    This is an alias to an internal value.
+
+const GetQueuesResponseQueuesFunctionStatusInactive = shared.GetQueuesResponseQueuesFunctionStatusInactive
+    This is an alias to an internal value.
+
 const InvokeFunctionResponseStatusErrored = shared.InvokeFunctionResponseStatusErrored
     This is an alias to an internal value.
 
@@ -103,51 +118,14 @@ func String(value string) param.Field[string]
 
 TYPES
 
-type AssetManagementAssetNewParams struct {
+type AssetNewParams struct {
 	// Content type of the asset such image/png, image/jpeg, etc.
 	ContentType param.Field[string] `json:"contentType,required"`
 	// Asset description
 	Description param.Field[string] `json:"description,required"`
 }
 
-func (r AssetManagementAssetNewParams) MarshalJSON() (data []byte, err error)
-
-type AssetManagementAssetService struct {
-	Options []option.RequestOption
-}
-    AssetManagementAssetService contains methods and other services that help
-    with interacting with the nvcf API.
-
-    Note, unlike clients, this service does not read variables from the
-    environment automatically. You should not instantiate this service directly,
-    and instead use the NewAssetManagementAssetService method instead.
-
-func NewAssetManagementAssetService(opts ...option.RequestOption) (r *AssetManagementAssetService)
-    NewAssetManagementAssetService generates a new service that applies the
-    given options to each request. These options are applied after the parent
-    client's options (if there is one), and before any request-specific options.
-
-func (r *AssetManagementAssetService) New(ctx context.Context, body AssetManagementAssetNewParams, opts ...option.RequestOption) (res *CreateAssetResponse, err error)
-    Creates a unique id representing an asset and a pre-signed URL to upload
-    the asset artifact to AWS S3 bucket for the NVIDIA Cloud Account. Requires
-    either a bearer token or an api-key with 'invoke_function' scope in the HTTP
-    Authorization header.
-
-type AssetManagementService struct {
-	Options []option.RequestOption
-	Assets  *AssetManagementAssetService
-}
-    AssetManagementService contains methods and other services that help with
-    interacting with the nvcf API.
-
-    Note, unlike clients, this service does not read variables from the
-    environment automatically. You should not instantiate this service directly,
-    and instead use the NewAssetManagementService method instead.
-
-func NewAssetManagementService(opts ...option.RequestOption) (r *AssetManagementService)
-    NewAssetManagementService generates a new service that applies the given
-    options to each request. These options are applied after the parent client's
-    options (if there is one), and before any request-specific options.
+func (r AssetNewParams) MarshalJSON() (data []byte, err error)
 
 type AssetResponse struct {
 	// Data Transfer Object(DTO) representing an asset
@@ -200,14 +178,20 @@ func (r *AssetService) List(ctx context.Context, opts ...option.RequestOption) (
     a bearer token or an api-key with invoke_function scope in the HTTP
     Authorization header.
 
-type AuthorizationFunctionAuthorizeParams struct {
-	// Parties authorized to invoke function
-	AuthorizedParties param.Field[[]AuthorizationFunctionAuthorizeParamsAuthorizedParty] `json:"authorizedParties,required"`
+func (r *AssetService) New(ctx context.Context, body AssetNewParams, opts ...option.RequestOption) (res *CreateAssetResponse, err error)
+    Creates a unique id representing an asset and a pre-signed URL to upload
+    the asset artifact to AWS S3 bucket for the NVIDIA Cloud Account. Requires
+    either a bearer token or an api-key with 'invoke_function' scope in the HTTP
+    Authorization header.
+
+type AuthorizationFunctionAddParams struct {
+	// Data Transfer Object(DTO) representing an authorized party.
+	AuthorizedParty param.Field[AuthorizationFunctionAddParamsAuthorizedParty] `json:"authorizedParty,required"`
 }
 
-func (r AuthorizationFunctionAuthorizeParams) MarshalJSON() (data []byte, err error)
+func (r AuthorizationFunctionAddParams) MarshalJSON() (data []byte, err error)
 
-type AuthorizationFunctionAuthorizeParamsAuthorizedParty struct {
+type AuthorizationFunctionAddParamsAuthorizedParty struct {
 	// NVIDIA Cloud Account authorized to invoke the function
 	NcaID param.Field[string] `json:"ncaId,required"`
 	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
@@ -215,7 +199,24 @@ type AuthorizationFunctionAuthorizeParamsAuthorizedParty struct {
 }
     Data Transfer Object(DTO) representing an authorized party.
 
-func (r AuthorizationFunctionAuthorizeParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
+func (r AuthorizationFunctionAddParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
+
+type AuthorizationFunctionRemoveParams struct {
+	// Data Transfer Object(DTO) representing an authorized party.
+	AuthorizedParty param.Field[AuthorizationFunctionRemoveParamsAuthorizedParty] `json:"authorizedParty,required"`
+}
+
+func (r AuthorizationFunctionRemoveParams) MarshalJSON() (data []byte, err error)
+
+type AuthorizationFunctionRemoveParamsAuthorizedParty struct {
+	// NVIDIA Cloud Account authorized to invoke the function
+	NcaID param.Field[string] `json:"ncaId,required"`
+	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
+	ClientID param.Field[string] `json:"clientId"`
+}
+    Data Transfer Object(DTO) representing an authorized party.
+
+func (r AuthorizationFunctionRemoveParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
 
 type AuthorizationFunctionService struct {
 	Options  []option.RequestOption
@@ -233,41 +234,36 @@ func NewAuthorizationFunctionService(opts ...option.RequestOption) (r *Authoriza
     given options to each request. These options are applied after the parent
     client's options (if there is one), and before any request-specific options.
 
-func (r *AuthorizationFunctionService) Authorize(ctx context.Context, functionID string, body AuthorizationFunctionAuthorizeParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Authorizes additional NVIDIA Cloud Accounts to invoke any version of the
-    specified function. By default, a function belongs to the NVIDIA Cloud
-    Account that created it, and the credentials used for function invocation
-    must reference the same NVIDIA Cloud Account. Upon invocation of this
-    endpoint, any existing authorized accounts will be overwritten by the newly
-    specified authorized accounts. Access to this functionality mandates the
-    inclusion of a bearer token with the 'authorize_clients' scope in the HTTP
-    Authorization header
+func (r *AuthorizationFunctionService) Add(ctx context.Context, functionID string, body AuthorizationFunctionAddParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Adds the specified NVIDIA Cloud Account to the set of authorized
+    accounts that are can invoke all the versions of the specified function.
+    If the specified function does not have any existing inheritable authorized
+    accounts, it results in a response with status 404. If the specified
+    account is already in the set of existing inheritable authorized accounts,
+    it results in a response with status code 409. If a function is public, then
+    Account Admin cannot perform this operation. Access to this functionality
+    mandates the inclusion of a bearer token with the 'authorize_clients' scope
+    in the HTTP Authorization header
 
-func (r *AuthorizationFunctionService) Delete(ctx context.Context, functionID string, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Deletes all the extra NVIDIA Cloud Accounts that were authorized to
-    invoke the function and all its versions. If a function version has its
-    own set of authorized accounts, those are not deleted. If the specified
-    function is public, then Account Admin cannot perform this operation.
-    Access to this functionality mandates the inclusion of a bearer token with
-    the 'authorize_clients' scope in the HTTP Authorization header
+func (r *AuthorizationFunctionService) Remove(ctx context.Context, functionID string, body AuthorizationFunctionRemoveParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Removes the specified NVIDIA Cloud Account from the set of authorized
+    accounts that can invoke all the versions of the specified function.
+    If the specified function does not have any existing inheritable authorized
+    parties, it results in a response with status 404. Also, if the specified
+    account is not in the existing set of inheritable authorized accounts,
+    it results in a response with status 400. If the specified function is
+    public, then Account Admin cannot perform this operation. Access to
+    this functionality mandates the inclusion of a bearer token with the
+    'authorize_clients' scope in the HTTP Authorization header
 
-func (r *AuthorizationFunctionService) Get(ctx context.Context, functionID string, opts ...option.RequestOption) (res *ListAuthorizedPartiesResponse, err error)
-    Lists NVIDIA Cloud Account IDs that are authorized to invoke any version of
-    the specified function. The response includes an array showing authorized
-    accounts for each version. Individual versions of a function can have their
-    own authorized accounts. So, each object in the array can have different
-    authorized accounts listed. Access to this functionality mandates the
-    inclusion of a bearer token with the 'authorize_clients' scope in the HTTP
-    Authorization header
-
-type AuthorizationFunctionVersionAuthorizeParams struct {
-	// Parties authorized to invoke function
-	AuthorizedParties param.Field[[]AuthorizationFunctionVersionAuthorizeParamsAuthorizedParty] `json:"authorizedParties,required"`
+type AuthorizationFunctionVersionAddParams struct {
+	// Data Transfer Object(DTO) representing an authorized party.
+	AuthorizedParty param.Field[AuthorizationFunctionVersionAddParamsAuthorizedParty] `json:"authorizedParty,required"`
 }
 
-func (r AuthorizationFunctionVersionAuthorizeParams) MarshalJSON() (data []byte, err error)
+func (r AuthorizationFunctionVersionAddParams) MarshalJSON() (data []byte, err error)
 
-type AuthorizationFunctionVersionAuthorizeParamsAuthorizedParty struct {
+type AuthorizationFunctionVersionAddParamsAuthorizedParty struct {
 	// NVIDIA Cloud Account authorized to invoke the function
 	NcaID param.Field[string] `json:"ncaId,required"`
 	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
@@ -275,7 +271,24 @@ type AuthorizationFunctionVersionAuthorizeParamsAuthorizedParty struct {
 }
     Data Transfer Object(DTO) representing an authorized party.
 
-func (r AuthorizationFunctionVersionAuthorizeParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
+func (r AuthorizationFunctionVersionAddParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
+
+type AuthorizationFunctionVersionRemoveParams struct {
+	// Data Transfer Object(DTO) representing an authorized party.
+	AuthorizedParty param.Field[AuthorizationFunctionVersionRemoveParamsAuthorizedParty] `json:"authorizedParty,required"`
+}
+
+func (r AuthorizationFunctionVersionRemoveParams) MarshalJSON() (data []byte, err error)
+
+type AuthorizationFunctionVersionRemoveParamsAuthorizedParty struct {
+	// NVIDIA Cloud Account authorized to invoke the function
+	NcaID param.Field[string] `json:"ncaId,required"`
+	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
+	ClientID param.Field[string] `json:"clientId"`
+}
+    Data Transfer Object(DTO) representing an authorized party.
+
+func (r AuthorizationFunctionVersionRemoveParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
 
 type AuthorizationFunctionVersionService struct {
 	Options []option.RequestOption
@@ -293,31 +306,28 @@ func NewAuthorizationFunctionVersionService(opts ...option.RequestOption) (r *Au
     parent client's options (if there is one), and before any request-specific
     options.
 
-func (r *AuthorizationFunctionVersionService) Authorize(ctx context.Context, functionID string, functionVersionID string, body AuthorizationFunctionVersionAuthorizeParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Authorizes additional NVIDIA Cloud Accounts to invoke a specific function
-    version. By default, a function belongs to the NVIDIA Cloud Account
-    that created it, and the credentials used for function invocation must
-    reference the same NVIDIA Cloud Account. Upon invocation of this endpoint,
-    any existing authorized accounts will be overwritten by the newly specified
-    authorized accounts. Access to this functionality mandates the inclusion of
-    a bearer token with the 'authorize_clients' scope in the HTTP Authorization
-    header
+func (r *AuthorizationFunctionVersionService) Add(ctx context.Context, functionID string, functionVersionID string, body AuthorizationFunctionVersionAddParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Adds the specified NVIDIA Cloud Account to the set of authorized accounts
+    that can invoke the specified function version. If the specified function
+    version does not have any existing inheritable authorized accounts, it
+    results in a response with status 404. If the specified account is already
+    in the set of existing authorized accounts that are directly associated
+    with the function version, it results in a response wit status code 409.
+    If a function is public, then Account Admin cannot perform this operation.
+    Access to this functionality mandates the inclusion of a bearer token with
+    the 'authorize_clients' scope in the HTTP Authorization header
 
-func (r *AuthorizationFunctionVersionService) Delete(ctx context.Context, functionID string, functionVersionID string, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Deletes all the authorized accounts that are directly associated with
-    the specified function version. Authorized parties that are inherited by
-    the function version are not deleted. If the specified function version
-    is public, then Account Admin cannot perform this operation. Access to
-    this functionality mandates the inclusion of a bearer token with the
-    'authorize_clients' scope in the HTTP Authorization header
-
-func (r *AuthorizationFunctionVersionService) Get(ctx context.Context, functionID string, functionVersionID string, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Gets NVIDIA Cloud Account IDs that are authorized to invoke specified
-    function version. Response includes authorized accounts that were added
-    specifically to the function version and the inherited authorized accounts
-    that were added at the function level. Access to this functionality mandates
-    the inclusion of a bearer token with the 'authorize_clients' scope in the
-    HTTP Authorization header
+func (r *AuthorizationFunctionVersionService) Remove(ctx context.Context, functionID string, functionVersionID string, body AuthorizationFunctionVersionRemoveParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Removes the specified NVIDIA Cloud Account from the set of authorized
+    accounts that are directly associated with specified function version. If
+    the specified function version does not have any of its own(not inherited)
+    authorized accounts, it results in a response with status 404. Also,
+    if the specified authorized account is not in the set of existing authorized
+    parties that are directly associated with the specified function version,
+    it results in a response with status code 400. If the specified function
+    version is public, then Account Admin cannot perform this operation.
+    Access to this functionality mandates the inclusion of a bearer token with
+    the 'authorize_clients' scope in the HTTP Authorization header
 
 type AuthorizationService struct {
 	Options   []option.RequestOption
@@ -335,14 +345,14 @@ func NewAuthorizationService(opts ...option.RequestOption) (r *AuthorizationServ
     options to each request. These options are applied after the parent client's
     options (if there is one), and before any request-specific options.
 
-type AuthorizedAccountFunctionAddParams struct {
-	// Data Transfer Object(DTO) representing an authorized party.
-	AuthorizedParty param.Field[AuthorizedAccountFunctionAddParamsAuthorizedParty] `json:"authorizedParty,required"`
+type AuthorizedAccountFunctionAuthorizeParams struct {
+	// Parties authorized to invoke function
+	AuthorizedParties param.Field[[]AuthorizedAccountFunctionAuthorizeParamsAuthorizedParty] `json:"authorizedParties,required"`
 }
 
-func (r AuthorizedAccountFunctionAddParams) MarshalJSON() (data []byte, err error)
+func (r AuthorizedAccountFunctionAuthorizeParams) MarshalJSON() (data []byte, err error)
 
-type AuthorizedAccountFunctionAddParamsAuthorizedParty struct {
+type AuthorizedAccountFunctionAuthorizeParamsAuthorizedParty struct {
 	// NVIDIA Cloud Account authorized to invoke the function
 	NcaID param.Field[string] `json:"ncaId,required"`
 	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
@@ -350,24 +360,7 @@ type AuthorizedAccountFunctionAddParamsAuthorizedParty struct {
 }
     Data Transfer Object(DTO) representing an authorized party.
 
-func (r AuthorizedAccountFunctionAddParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
-
-type AuthorizedAccountFunctionRemoveParams struct {
-	// Data Transfer Object(DTO) representing an authorized party.
-	AuthorizedParty param.Field[AuthorizedAccountFunctionRemoveParamsAuthorizedParty] `json:"authorizedParty,required"`
-}
-
-func (r AuthorizedAccountFunctionRemoveParams) MarshalJSON() (data []byte, err error)
-
-type AuthorizedAccountFunctionRemoveParamsAuthorizedParty struct {
-	// NVIDIA Cloud Account authorized to invoke the function
-	NcaID param.Field[string] `json:"ncaId,required"`
-	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
-	ClientID param.Field[string] `json:"clientId"`
-}
-    Data Transfer Object(DTO) representing an authorized party.
-
-func (r AuthorizedAccountFunctionRemoveParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
+func (r AuthorizedAccountFunctionAuthorizeParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
 
 type AuthorizedAccountFunctionService struct {
 	Options  []option.RequestOption
@@ -385,36 +378,41 @@ func NewAuthorizedAccountFunctionService(opts ...option.RequestOption) (r *Autho
     given options to each request. These options are applied after the parent
     client's options (if there is one), and before any request-specific options.
 
-func (r *AuthorizedAccountFunctionService) Add(ctx context.Context, functionID string, body AuthorizedAccountFunctionAddParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Adds the specified NVIDIA Cloud Account to the set of authorized
-    accounts that are can invoke all the versions of the specified function.
-    If the specified function does not have any existing inheritable authorized
-    accounts, it results in a response with status 404. If the specified
-    account is already in the set of existing inheritable authorized accounts,
-    it results in a response with status code 409. If a function is public, then
-    Account Admin cannot perform this operation. Access to this functionality
-    mandates the inclusion of a bearer token with the 'authorize_clients' scope
-    in the HTTP Authorization header
+func (r *AuthorizedAccountFunctionService) Authorize(ctx context.Context, functionID string, body AuthorizedAccountFunctionAuthorizeParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Authorizes additional NVIDIA Cloud Accounts to invoke any version of the
+    specified function. By default, a function belongs to the NVIDIA Cloud
+    Account that created it, and the credentials used for function invocation
+    must reference the same NVIDIA Cloud Account. Upon invocation of this
+    endpoint, any existing authorized accounts will be overwritten by the newly
+    specified authorized accounts. Access to this functionality mandates the
+    inclusion of a bearer token with the 'authorize_clients' scope in the HTTP
+    Authorization header
 
-func (r *AuthorizedAccountFunctionService) Remove(ctx context.Context, functionID string, body AuthorizedAccountFunctionRemoveParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Removes the specified NVIDIA Cloud Account from the set of authorized
-    accounts that can invoke all the versions of the specified function.
-    If the specified function does not have any existing inheritable authorized
-    parties, it results in a response with status 404. Also, if the specified
-    account is not in the existing set of inheritable authorized accounts,
-    it results in a response with status 400. If the specified function is
-    public, then Account Admin cannot perform this operation. Access to
-    this functionality mandates the inclusion of a bearer token with the
-    'authorize_clients' scope in the HTTP Authorization header
+func (r *AuthorizedAccountFunctionService) Delete(ctx context.Context, functionID string, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Deletes all the extra NVIDIA Cloud Accounts that were authorized to
+    invoke the function and all its versions. If a function version has its
+    own set of authorized accounts, those are not deleted. If the specified
+    function is public, then Account Admin cannot perform this operation.
+    Access to this functionality mandates the inclusion of a bearer token with
+    the 'authorize_clients' scope in the HTTP Authorization header
 
-type AuthorizedAccountFunctionVersionAddParams struct {
-	// Data Transfer Object(DTO) representing an authorized party.
-	AuthorizedParty param.Field[AuthorizedAccountFunctionVersionAddParamsAuthorizedParty] `json:"authorizedParty,required"`
+func (r *AuthorizedAccountFunctionService) Get(ctx context.Context, functionID string, opts ...option.RequestOption) (res *ListAuthorizedPartiesResponse, err error)
+    Lists NVIDIA Cloud Account IDs that are authorized to invoke any version of
+    the specified function. The response includes an array showing authorized
+    accounts for each version. Individual versions of a function can have their
+    own authorized accounts. So, each object in the array can have different
+    authorized accounts listed. Access to this functionality mandates the
+    inclusion of a bearer token with the 'authorize_clients' scope in the HTTP
+    Authorization header
+
+type AuthorizedAccountFunctionVersionAuthorizeParams struct {
+	// Parties authorized to invoke function
+	AuthorizedParties param.Field[[]AuthorizedAccountFunctionVersionAuthorizeParamsAuthorizedParty] `json:"authorizedParties,required"`
 }
 
-func (r AuthorizedAccountFunctionVersionAddParams) MarshalJSON() (data []byte, err error)
+func (r AuthorizedAccountFunctionVersionAuthorizeParams) MarshalJSON() (data []byte, err error)
 
-type AuthorizedAccountFunctionVersionAddParamsAuthorizedParty struct {
+type AuthorizedAccountFunctionVersionAuthorizeParamsAuthorizedParty struct {
 	// NVIDIA Cloud Account authorized to invoke the function
 	NcaID param.Field[string] `json:"ncaId,required"`
 	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
@@ -422,24 +420,7 @@ type AuthorizedAccountFunctionVersionAddParamsAuthorizedParty struct {
 }
     Data Transfer Object(DTO) representing an authorized party.
 
-func (r AuthorizedAccountFunctionVersionAddParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
-
-type AuthorizedAccountFunctionVersionRemoveParams struct {
-	// Data Transfer Object(DTO) representing an authorized party.
-	AuthorizedParty param.Field[AuthorizedAccountFunctionVersionRemoveParamsAuthorizedParty] `json:"authorizedParty,required"`
-}
-
-func (r AuthorizedAccountFunctionVersionRemoveParams) MarshalJSON() (data []byte, err error)
-
-type AuthorizedAccountFunctionVersionRemoveParamsAuthorizedParty struct {
-	// NVIDIA Cloud Account authorized to invoke the function
-	NcaID param.Field[string] `json:"ncaId,required"`
-	// Client Id -- 'sub' claim in the JWT. This field should not be specified anymore.
-	ClientID param.Field[string] `json:"clientId"`
-}
-    Data Transfer Object(DTO) representing an authorized party.
-
-func (r AuthorizedAccountFunctionVersionRemoveParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
+func (r AuthorizedAccountFunctionVersionAuthorizeParamsAuthorizedParty) MarshalJSON() (data []byte, err error)
 
 type AuthorizedAccountFunctionVersionService struct {
 	Options []option.RequestOption
@@ -458,28 +439,31 @@ func NewAuthorizedAccountFunctionVersionService(opts ...option.RequestOption) (r
     after the parent client's options (if there is one), and before any
     request-specific options.
 
-func (r *AuthorizedAccountFunctionVersionService) Add(ctx context.Context, functionID string, functionVersionID string, body AuthorizedAccountFunctionVersionAddParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Adds the specified NVIDIA Cloud Account to the set of authorized accounts
-    that can invoke the specified function version. If the specified function
-    version does not have any existing inheritable authorized accounts, it
-    results in a response with status 404. If the specified account is already
-    in the set of existing authorized accounts that are directly associated
-    with the function version, it results in a response wit status code 409.
-    If a function is public, then Account Admin cannot perform this operation.
-    Access to this functionality mandates the inclusion of a bearer token with
-    the 'authorize_clients' scope in the HTTP Authorization header
+func (r *AuthorizedAccountFunctionVersionService) Authorize(ctx context.Context, functionID string, functionVersionID string, body AuthorizedAccountFunctionVersionAuthorizeParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Authorizes additional NVIDIA Cloud Accounts to invoke a specific function
+    version. By default, a function belongs to the NVIDIA Cloud Account
+    that created it, and the credentials used for function invocation must
+    reference the same NVIDIA Cloud Account. Upon invocation of this endpoint,
+    any existing authorized accounts will be overwritten by the newly specified
+    authorized accounts. Access to this functionality mandates the inclusion of
+    a bearer token with the 'authorize_clients' scope in the HTTP Authorization
+    header
 
-func (r *AuthorizedAccountFunctionVersionService) Remove(ctx context.Context, functionID string, functionVersionID string, body AuthorizedAccountFunctionVersionRemoveParams, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
-    Removes the specified NVIDIA Cloud Account from the set of authorized
-    accounts that are directly associated with specified function version. If
-    the specified function version does not have any of its own(not inherited)
-    authorized accounts, it results in a response with status 404. Also,
-    if the specified authorized account is not in the set of existing authorized
-    parties that are directly associated with the specified function version,
-    it results in a response with status code 400. If the specified function
-    version is public, then Account Admin cannot perform this operation.
-    Access to this functionality mandates the inclusion of a bearer token with
-    the 'authorize_clients' scope in the HTTP Authorization header
+func (r *AuthorizedAccountFunctionVersionService) Delete(ctx context.Context, functionID string, functionVersionID string, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Deletes all the authorized accounts that are directly associated with
+    the specified function version. Authorized parties that are inherited by
+    the function version are not deleted. If the specified function version
+    is public, then Account Admin cannot perform this operation. Access to
+    this functionality mandates the inclusion of a bearer token with the
+    'authorize_clients' scope in the HTTP Authorization header
+
+func (r *AuthorizedAccountFunctionVersionService) Get(ctx context.Context, functionID string, functionVersionID string, opts ...option.RequestOption) (res *shared.AuthorizedPartiesResponse, err error)
+    Gets NVIDIA Cloud Account IDs that are authorized to invoke specified
+    function version. Response includes authorized accounts that were added
+    specifically to the function version and the inherited authorized accounts
+    that were added at the function level. Access to this functionality mandates
+    the inclusion of a bearer token with the 'authorize_clients' scope in the
+    HTTP Authorization header
 
 type AuthorizedAccountService struct {
 	Options   []option.RequestOption
@@ -514,16 +498,17 @@ type AuthorizedPartiesResponseFunctionAuthorizedParty = shared.AuthorizedParties
 
 type Client struct {
 	Options                    []option.RequestOption
+	UserSecretManagement       *UserSecretManagementService
 	FunctionManagement         *FunctionManagementService
 	FunctionDeployment         *FunctionDeploymentService
 	FunctionInvocation         *FunctionInvocationService
 	EnvelopeFunctionInvocation *EnvelopeFunctionInvocationService
 	Functions                  *FunctionService
-	Authorizations             *AuthorizationService
-	Assets                     *AssetService
-	AssetManagement            *AssetManagementService
 	AuthorizedAccounts         *AuthorizedAccountService
-	QueueDetails               *QueueDetailService
+	Assets                     *AssetService
+	Authorizations             *AuthorizationService
+	Queues                     *QueueService
+	Pexec                      *PexecService
 	Exec                       *ExecService
 	ClusterGroups              *ClusterGroupService
 }
@@ -533,9 +518,9 @@ type Client struct {
 
 func NewClient(opts ...option.RequestOption) (r *Client)
     NewClient generates a new client with the default option read from the
-    environment (). The option passed in as arguments are applied after these
-    default arguments, and all option will be passed down to the services and
-    requests that this client makes.
+    environment (NGC_CLI_API_KEY). The option passed in as arguments are applied
+    after these default arguments, and all option will be passed down to the
+    services and requests that this client makes.
 
 func (r *Client) Delete(ctx context.Context, path string, params interface{}, res interface{}, opts ...option.RequestOption) error
     Delete makes a DELETE request with the given URL, params, and optionally
@@ -980,30 +965,30 @@ type DeploymentResponseDeploymentHealthInfo struct {
 
 func (r *DeploymentResponseDeploymentHealthInfo) UnmarshalJSON(data []byte) (err error)
 
-type EnvelopeFunctionInvocationFunctionInvokeParams struct {
+type EnvelopeFunctionInvocationFunctionInvokeEnvelopeParams struct {
 	RequestBody param.Field[interface{}] `json:"requestBody,required"`
 	// Data Transfer Object(DTO) representing header/address for Cloud Functions
 	// processing.
-	RequestHeader param.Field[EnvelopeFunctionInvocationFunctionInvokeParamsRequestHeader] `json:"requestHeader"`
+	RequestHeader param.Field[EnvelopeFunctionInvocationFunctionInvokeEnvelopeParamsRequestHeader] `json:"requestHeader"`
 }
 
-func (r EnvelopeFunctionInvocationFunctionInvokeParams) MarshalJSON() (data []byte, err error)
+func (r EnvelopeFunctionInvocationFunctionInvokeEnvelopeParams) MarshalJSON() (data []byte, err error)
 
-type EnvelopeFunctionInvocationFunctionInvokeParamsRequestHeader struct {
+type EnvelopeFunctionInvocationFunctionInvokeEnvelopeParamsRequestHeader struct {
 	// List of UUIDs corresponding to the uploaded assets to be used as input for
 	// executing the task.
 	InputAssetReferences param.Field[[]string] `json:"inputAssetReferences" format:"uuid"`
 	// Metadata used for billing/metering purposes.
-	MeteringData param.Field[[]EnvelopeFunctionInvocationFunctionInvokeParamsRequestHeaderMeteringData] `json:"meteringData"`
+	MeteringData param.Field[[]EnvelopeFunctionInvocationFunctionInvokeEnvelopeParamsRequestHeaderMeteringData] `json:"meteringData"`
 	// Polling timeout duration.
 	PollDurationSeconds param.Field[int64] `json:"pollDurationSeconds"`
 }
     Data Transfer Object(DTO) representing header/address for Cloud Functions
     processing.
 
-func (r EnvelopeFunctionInvocationFunctionInvokeParamsRequestHeader) MarshalJSON() (data []byte, err error)
+func (r EnvelopeFunctionInvocationFunctionInvokeEnvelopeParamsRequestHeader) MarshalJSON() (data []byte, err error)
 
-type EnvelopeFunctionInvocationFunctionInvokeParamsRequestHeaderMeteringData struct {
+type EnvelopeFunctionInvocationFunctionInvokeEnvelopeParamsRequestHeaderMeteringData struct {
 	// Metering/Billing key
 	Key param.Field[string] `json:"key,required"`
 	// Metering/Billing value
@@ -1011,7 +996,7 @@ type EnvelopeFunctionInvocationFunctionInvokeParamsRequestHeaderMeteringData str
 }
     Data Transfer Object(DTO) representing a billing/metering data entry
 
-func (r EnvelopeFunctionInvocationFunctionInvokeParamsRequestHeaderMeteringData) MarshalJSON() (data []byte, err error)
+func (r EnvelopeFunctionInvocationFunctionInvokeEnvelopeParamsRequestHeaderMeteringData) MarshalJSON() (data []byte, err error)
 
 type EnvelopeFunctionInvocationFunctionService struct {
 	Options  []option.RequestOption
@@ -1031,7 +1016,7 @@ func NewEnvelopeFunctionInvocationFunctionService(opts ...option.RequestOption) 
     after the parent client's options (if there is one), and before any
     request-specific options.
 
-func (r *EnvelopeFunctionInvocationFunctionService) Invoke(ctx context.Context, functionID string, body EnvelopeFunctionInvocationFunctionInvokeParams, opts ...option.RequestOption) (res *shared.InvokeFunctionResponse, err error)
+func (r *EnvelopeFunctionInvocationFunctionService) InvokeEnvelope(ctx context.Context, functionID string, body EnvelopeFunctionInvocationFunctionInvokeEnvelopeParams, opts ...option.RequestOption) (res *shared.InvokeFunctionResponse, err error)
     Invokes the specified function that was successfully deployed. If the
     version is not specified, any active function versions will handle the
     request. If the version is specified in the URI, then the request is
@@ -1049,30 +1034,30 @@ func (r *EnvelopeFunctionInvocationFunctionService) Invoke(ctx context.Context, 
     receive the most recent in-progress response. Only the first 256 unread
     in-progress messages are kept.
 
-type EnvelopeFunctionInvocationFunctionVersionInvokeParams struct {
+type EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParams struct {
 	RequestBody param.Field[interface{}] `json:"requestBody,required"`
 	// Data Transfer Object(DTO) representing header/address for Cloud Functions
 	// processing.
-	RequestHeader param.Field[EnvelopeFunctionInvocationFunctionVersionInvokeParamsRequestHeader] `json:"requestHeader"`
+	RequestHeader param.Field[EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParamsRequestHeader] `json:"requestHeader"`
 }
 
-func (r EnvelopeFunctionInvocationFunctionVersionInvokeParams) MarshalJSON() (data []byte, err error)
+func (r EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParams) MarshalJSON() (data []byte, err error)
 
-type EnvelopeFunctionInvocationFunctionVersionInvokeParamsRequestHeader struct {
+type EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParamsRequestHeader struct {
 	// List of UUIDs corresponding to the uploaded assets to be used as input for
 	// executing the task.
 	InputAssetReferences param.Field[[]string] `json:"inputAssetReferences" format:"uuid"`
 	// Metadata used for billing/metering purposes.
-	MeteringData param.Field[[]EnvelopeFunctionInvocationFunctionVersionInvokeParamsRequestHeaderMeteringData] `json:"meteringData"`
+	MeteringData param.Field[[]EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParamsRequestHeaderMeteringData] `json:"meteringData"`
 	// Polling timeout duration.
 	PollDurationSeconds param.Field[int64] `json:"pollDurationSeconds"`
 }
     Data Transfer Object(DTO) representing header/address for Cloud Functions
     processing.
 
-func (r EnvelopeFunctionInvocationFunctionVersionInvokeParamsRequestHeader) MarshalJSON() (data []byte, err error)
+func (r EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParamsRequestHeader) MarshalJSON() (data []byte, err error)
 
-type EnvelopeFunctionInvocationFunctionVersionInvokeParamsRequestHeaderMeteringData struct {
+type EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParamsRequestHeaderMeteringData struct {
 	// Metering/Billing key
 	Key param.Field[string] `json:"key,required"`
 	// Metering/Billing value
@@ -1080,7 +1065,7 @@ type EnvelopeFunctionInvocationFunctionVersionInvokeParamsRequestHeaderMeteringD
 }
     Data Transfer Object(DTO) representing a billing/metering data entry
 
-func (r EnvelopeFunctionInvocationFunctionVersionInvokeParamsRequestHeaderMeteringData) MarshalJSON() (data []byte, err error)
+func (r EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParamsRequestHeaderMeteringData) MarshalJSON() (data []byte, err error)
 
 type EnvelopeFunctionInvocationFunctionVersionService struct {
 	Options []option.RequestOption
@@ -1099,7 +1084,7 @@ func NewEnvelopeFunctionInvocationFunctionVersionService(opts ...option.RequestO
     applied after the parent client's options (if there is one), and before any
     request-specific options.
 
-func (r *EnvelopeFunctionInvocationFunctionVersionService) Invoke(ctx context.Context, functionID string, versionID string, body EnvelopeFunctionInvocationFunctionVersionInvokeParams, opts ...option.RequestOption) (res *shared.InvokeFunctionResponse, err error)
+func (r *EnvelopeFunctionInvocationFunctionVersionService) InvokeEnvelope(ctx context.Context, functionID string, versionID string, body EnvelopeFunctionInvocationFunctionVersionInvokeEnvelopeParams, opts ...option.RequestOption) (res *shared.InvokeFunctionResponse, err error)
     Invokes the specified function that was successfully deployed. If the
     version is not specified, any active function versions will handle the
     request. If the version is specified in the URI, then the request is
@@ -1195,23 +1180,24 @@ func NewFunctionDeploymentFunctionService(opts ...option.RequestOption) (r *Func
     parent client's options (if there is one), and before any request-specific
     options.
 
-type FunctionDeploymentFunctionVersionDeleteParams struct {
+type FunctionDeploymentFunctionVersionDeleteDeploymentParams struct {
 	// Query param to deactivate function for graceful shutdown
 	Graceful param.Field[bool] `query:"graceful"`
 }
 
-func (r FunctionDeploymentFunctionVersionDeleteParams) URLQuery() (v url.Values)
-    URLQuery serializes FunctionDeploymentFunctionVersionDeleteParams's query
-    parameters as `url.Values`.
+func (r FunctionDeploymentFunctionVersionDeleteDeploymentParams) URLQuery() (v url.Values)
+    URLQuery serializes
+    FunctionDeploymentFunctionVersionDeleteDeploymentParams's query parameters
+    as `url.Values`.
 
-type FunctionDeploymentFunctionVersionNewParams struct {
+type FunctionDeploymentFunctionVersionInitiateDeploymentParams struct {
 	// Deployment specs with Backend, GPU, instance-type, etc. details
-	DeploymentSpecifications param.Field[[]FunctionDeploymentFunctionVersionNewParamsDeploymentSpecification] `json:"deploymentSpecifications,required"`
+	DeploymentSpecifications param.Field[[]FunctionDeploymentFunctionVersionInitiateDeploymentParamsDeploymentSpecification] `json:"deploymentSpecifications,required"`
 }
 
-func (r FunctionDeploymentFunctionVersionNewParams) MarshalJSON() (data []byte, err error)
+func (r FunctionDeploymentFunctionVersionInitiateDeploymentParams) MarshalJSON() (data []byte, err error)
 
-type FunctionDeploymentFunctionVersionNewParamsDeploymentSpecification struct {
+type FunctionDeploymentFunctionVersionInitiateDeploymentParamsDeploymentSpecification struct {
 	// GPU name from the cluster
 	GPU param.Field[string] `json:"gpu,required"`
 	// Instance type, based on GPU, assigned to a Worker
@@ -1240,7 +1226,7 @@ type FunctionDeploymentFunctionVersionNewParamsDeploymentSpecification struct {
 }
     Data Transfer Object(DTO) representing GPU specification.
 
-func (r FunctionDeploymentFunctionVersionNewParamsDeploymentSpecification) MarshalJSON() (data []byte, err error)
+func (r FunctionDeploymentFunctionVersionInitiateDeploymentParamsDeploymentSpecification) MarshalJSON() (data []byte, err error)
 
 type FunctionDeploymentFunctionVersionService struct {
 	Options []option.RequestOption
@@ -1259,7 +1245,7 @@ func NewFunctionDeploymentFunctionVersionService(opts ...option.RequestOption) (
     after the parent client's options (if there is one), and before any
     request-specific options.
 
-func (r *FunctionDeploymentFunctionVersionService) Delete(ctx context.Context, functionID string, functionVersionID string, body FunctionDeploymentFunctionVersionDeleteParams, opts ...option.RequestOption) (res *shared.FunctionResponse, err error)
+func (r *FunctionDeploymentFunctionVersionService) DeleteDeployment(ctx context.Context, functionID string, functionVersionID string, body FunctionDeploymentFunctionVersionDeleteDeploymentParams, opts ...option.RequestOption) (res *shared.FunctionResponse, err error)
     Deletes the deployment associated with the specified function. Upon
     deletion, any active instances will be terminated, and the function's status
     will transition to 'INACTIVE'. To undeploy a function version gracefully,
@@ -1269,19 +1255,19 @@ func (r *FunctionDeploymentFunctionVersionService) Delete(ctx context.Context, f
     endpoint mandates a bearer token with 'deploy_function' scope in the HTTP
     Authorization header.
 
-func (r *FunctionDeploymentFunctionVersionService) Get(ctx context.Context, functionID string, functionVersionID string, opts ...option.RequestOption) (res *DeploymentResponse, err error)
+func (r *FunctionDeploymentFunctionVersionService) GetDeployment(ctx context.Context, functionID string, functionVersionID string, opts ...option.RequestOption) (res *DeploymentResponse, err error)
     Allows Account Admins to retrieve the deployment details of the specified
     function version. Access to this endpoint mandates a bearer token with
     'deploy_function' scope in the HTTP Authorization header.
 
-func (r *FunctionDeploymentFunctionVersionService) New(ctx context.Context, functionID string, functionVersionID string, body FunctionDeploymentFunctionVersionNewParams, opts ...option.RequestOption) (res *DeploymentResponse, err error)
+func (r *FunctionDeploymentFunctionVersionService) InitiateDeployment(ctx context.Context, functionID string, functionVersionID string, body FunctionDeploymentFunctionVersionInitiateDeploymentParams, opts ...option.RequestOption) (res *DeploymentResponse, err error)
     Initiates deployment for the specified function version. Upon invocation
     of this endpoint, the function's status transitions to 'DEPLOYING'.
     If the specified function version is public, then Account Admin cannot
     perform this operation. Access to this endpoint mandates a bearer token with
     'deploy_function' scope in the HTTP Authorization header.
 
-func (r *FunctionDeploymentFunctionVersionService) Update(ctx context.Context, functionID string, functionVersionID string, body FunctionDeploymentFunctionVersionUpdateParams, opts ...option.RequestOption) (res *DeploymentResponse, err error)
+func (r *FunctionDeploymentFunctionVersionService) UpdateDeployment(ctx context.Context, functionID string, functionVersionID string, body FunctionDeploymentFunctionVersionUpdateDeploymentParams, opts ...option.RequestOption) (res *DeploymentResponse, err error)
     Updates the deployment specs of the specified function version.
     It's important to note that GPU type and backend configurations cannot
     be modified through this endpoint. If the specified function is public,
@@ -1289,14 +1275,14 @@ func (r *FunctionDeploymentFunctionVersionService) Update(ctx context.Context, f
     endpoint mandates a bearer token with 'deploy_function' scope in the HTTP
     Authorization header.
 
-type FunctionDeploymentFunctionVersionUpdateParams struct {
-	// Deployment specs with Backend, GPU, instance-type, etc. details
-	DeploymentSpecifications param.Field[[]FunctionDeploymentFunctionVersionUpdateParamsDeploymentSpecification] `json:"deploymentSpecifications,required"`
+type FunctionDeploymentFunctionVersionUpdateDeploymentParams struct {
+	// Deployment specs with GPU, instance-type, etc. details for update request
+	DeploymentSpecifications param.Field[[]FunctionDeploymentFunctionVersionUpdateDeploymentParamsDeploymentSpecification] `json:"deploymentSpecifications,required"`
 }
 
-func (r FunctionDeploymentFunctionVersionUpdateParams) MarshalJSON() (data []byte, err error)
+func (r FunctionDeploymentFunctionVersionUpdateDeploymentParams) MarshalJSON() (data []byte, err error)
 
-type FunctionDeploymentFunctionVersionUpdateParamsDeploymentSpecification struct {
+type FunctionDeploymentFunctionVersionUpdateDeploymentParamsDeploymentSpecification struct {
 	// GPU name from the cluster
 	GPU param.Field[string] `json:"gpu,required"`
 	// Instance type, based on GPU, assigned to a Worker
@@ -1305,27 +1291,13 @@ type FunctionDeploymentFunctionVersionUpdateParamsDeploymentSpecification struct
 	MaxInstances param.Field[int64] `json:"maxInstances,required"`
 	// Minimum number of spot instances for the deployment
 	MinInstances param.Field[int64] `json:"minInstances,required"`
-	// Specific attributes capabilities to deploy functions.
-	Attributes param.Field[[]string] `json:"attributes"`
-	// List of availability-zones(or clusters) in the cluster group
-	AvailabilityZones param.Field[[]string] `json:"availabilityZones"`
-	// Backend/CSP where the GPU powered instance will be launched
-	Backend param.Field[string] `json:"backend"`
-	// Specific clusters within spot instance or worker node powered by the selected
-	// instance-type to deploy function.
-	Clusters      param.Field[[]string]    `json:"clusters"`
-	Configuration param.Field[interface{}] `json:"configuration"`
 	// Max request concurrency between 1 (default) and 1024.
 	MaxRequestConcurrency param.Field[int64] `json:"maxRequestConcurrency"`
-	// Preferred order of deployment if there are several gpu specs.
-	PreferredOrder param.Field[int64] `json:"preferredOrder"`
-	// List of regions allowed to deploy. The instance or worker node will be in one of
-	// the specified geographical regions.
-	Regions param.Field[[]string] `json:"regions"`
 }
-    Data Transfer Object(DTO) representing GPU specification.
+    Data Transfer Object(DTO) representing GPU specification for Deployment
+    Update case.
 
-func (r FunctionDeploymentFunctionVersionUpdateParamsDeploymentSpecification) MarshalJSON() (data []byte, err error)
+func (r FunctionDeploymentFunctionVersionUpdateDeploymentParamsDeploymentSpecification) MarshalJSON() (data []byte, err error)
 
 type FunctionDeploymentService struct {
 	Options   []option.RequestOption
@@ -1498,7 +1470,6 @@ func (r *FunctionInvocationFunctionVersionService) Invoke(ctx context.Context, f
 type FunctionInvocationService struct {
 	Options   []option.RequestOption
 	Functions *FunctionInvocationFunctionService
-	Status    *FunctionInvocationStatusService
 }
     FunctionInvocationService contains methods and other services that help with
     interacting with the nvcf API.
@@ -1511,50 +1482,6 @@ func NewFunctionInvocationService(opts ...option.RequestOption) (r *FunctionInvo
     NewFunctionInvocationService generates a new service that applies the given
     options to each request. These options are applied after the parent client's
     options (if there is one), and before any request-specific options.
-
-type FunctionInvocationStatusGetParams struct {
-	NvcfPollSeconds param.Field[int64] `header:"NVCF-POLL-SECONDS"`
-}
-
-type FunctionInvocationStatusGetResponse struct {
-	Char     string                                  `json:"char"`
-	Direct   bool                                    `json:"direct"`
-	Double   float64                                 `json:"double"`
-	Float    float64                                 `json:"float"`
-	Int      int64                                   `json:"int"`
-	Long     int64                                   `json:"long"`
-	ReadOnly bool                                    `json:"readOnly"`
-	Short    int64                                   `json:"short"`
-	JSON     functionInvocationStatusGetResponseJSON `json:"-"`
-}
-
-func (r *FunctionInvocationStatusGetResponse) UnmarshalJSON(data []byte) (err error)
-
-type FunctionInvocationStatusService struct {
-	Options []option.RequestOption
-}
-    FunctionInvocationStatusService contains methods and other services that
-    help with interacting with the nvcf API.
-
-    Note, unlike clients, this service does not read variables from the
-    environment automatically. You should not instantiate this service directly,
-    and instead use the NewFunctionInvocationStatusService method instead.
-
-func NewFunctionInvocationStatusService(opts ...option.RequestOption) (r *FunctionInvocationStatusService)
-    NewFunctionInvocationStatusService generates a new service that applies the
-    given options to each request. These options are applied after the parent
-    client's options (if there is one), and before any request-specific options.
-
-func (r *FunctionInvocationStatusService) Get(ctx context.Context, requestID string, query FunctionInvocationStatusGetParams, opts ...option.RequestOption) (res *FunctionInvocationStatusGetResponse, err error)
-    Retrieves the status of an in-progress or pending request using its
-    unique invocation request ID. If the result is available, it will be
-    included in the response, marking the request as fulfilled. Conversely,
-    if the result is not yet available, the request is deemed pending. Access
-    to this endpoint mandates inclusion of either a bearer token or an api-key
-    with 'invoke_function' scope in the HTTP Authorization header. In-progress
-    responses are returned in order. If no in-progress response is received
-    during polling you will receive the most recent in-progress response.
-    Only the first 256 unread in-progress messages are kept.
 
 type FunctionListParams struct {
 	// Query param 'visibility' indicates the kind of functions to be included in the
@@ -1608,34 +1535,38 @@ func NewFunctionManagementFunctionVersionService(opts ...option.RequestOption) (
     after the parent client's options (if there is one), and before any
     request-specific options.
 
-func (r *FunctionManagementFunctionVersionService) Get(ctx context.Context, functionID string, functionVersionID string, opts ...option.RequestOption) (res *shared.FunctionResponse, err error)
-    Retrieves detailed information of the specified function version in the
-    authenticated NVIDIA Cloud Account. Requires either a bearer token or an
-    api-key with 'list_functions' or 'list_functions_details' scopes in the HTTP
-    Authorization header.
-
-func (r *FunctionManagementFunctionVersionService) List(ctx context.Context, functionID string, opts ...option.RequestOption) (res *ListFunctionsResponse, err error)
-    Lists details of all the versions of the specified function in the
-    authenticated NVIDIA Cloud Account. Requires either a bearer token or an
-    api-key with 'list_functions' or 'list_functions_details' scopes in the HTTP
-    Authorization header.
-
-func (r *FunctionManagementFunctionVersionService) Update(ctx context.Context, functionID string, functionVersionID string, body FunctionManagementFunctionVersionUpdateParams, opts ...option.RequestOption) (res *shared.FunctionResponse, err error)
+func (r *FunctionManagementFunctionVersionService) UpdateMetadata(ctx context.Context, functionID string, functionVersionID string, body FunctionManagementFunctionVersionUpdateMetadataParams, opts ...option.RequestOption) (res *shared.FunctionResponse, err error)
     Updates metadata, such as tags, of the specified function version within
     the authenticated NVIDIA Cloud Account. Values specified in the payload
     completely override the existing values. Requires a bearer token with
     'update_function' scope in the HTTP Authorization header.
 
-type FunctionManagementFunctionVersionUpdateParams struct {
+type FunctionManagementFunctionVersionUpdateMetadataParams struct {
 	// Set of tags provided by user
 	Tags param.Field[[]string] `json:"tags"`
 }
 
-func (r FunctionManagementFunctionVersionUpdateParams) MarshalJSON() (data []byte, err error)
+func (r FunctionManagementFunctionVersionUpdateMetadataParams) MarshalJSON() (data []byte, err error)
+
+type FunctionManagementIDService struct {
+	Options []option.RequestOption
+}
+    FunctionManagementIDService contains methods and other services that help
+    with interacting with the nvcf API.
+
+    Note, unlike clients, this service does not read variables from the
+    environment automatically. You should not instantiate this service directly,
+    and instead use the NewFunctionManagementIDService method instead.
+
+func NewFunctionManagementIDService(opts ...option.RequestOption) (r *FunctionManagementIDService)
+    NewFunctionManagementIDService generates a new service that applies the
+    given options to each request. These options are applied after the parent
+    client's options (if there is one), and before any request-specific options.
 
 type FunctionManagementService struct {
 	Options   []option.RequestOption
 	Functions *FunctionManagementFunctionService
+	IDs       *FunctionManagementIDService
 }
     FunctionManagementService contains methods and other services that help with
     interacting with the nvcf API.
@@ -1866,6 +1797,16 @@ func (r *FunctionService) New(ctx context.Context, body FunctionNewParams, opts 
     Requires a bearer token with 'register_function' scope in the HTTP
     Authorization header.
 
+type FunctionVersionGetParams struct {
+	// Query param 'includeSecrets' indicates whether to include secret names for the
+	// function in the response.
+	IncludeSecrets param.Field[bool] `query:"includeSecrets"`
+}
+
+func (r FunctionVersionGetParams) URLQuery() (v url.Values)
+    URLQuery serializes FunctionVersionGetParams's query parameters as
+    `url.Values`.
+
 type FunctionVersionNewParams struct {
 	// Entrypoint for invoking the container to process a request
 	InferenceURL param.Field[string] `json:"inferenceUrl,required" format:"uri"`
@@ -2017,10 +1958,50 @@ func (r *FunctionVersionService) Delete(ctx context.Context, functionID string, 
     Authorization header. If the function version is public, then Account Admin
     cannot delete the function.
 
+func (r *FunctionVersionService) Get(ctx context.Context, functionID string, functionVersionID string, query FunctionVersionGetParams, opts ...option.RequestOption) (res *shared.FunctionResponse, err error)
+    Retrieves detailed information of the specified function version in the
+    authenticated NVIDIA Cloud Account. Requires either a bearer token or an
+    api-key with 'list_functions' or 'list_functions_details' scopes in the HTTP
+    Authorization header.
+
+func (r *FunctionVersionService) List(ctx context.Context, functionID string, opts ...option.RequestOption) (res *ListFunctionsResponse, err error)
+    Lists details of all the versions of the specified function in the
+    authenticated NVIDIA Cloud Account. Requires either a bearer token or an
+    api-key with 'list_functions' or 'list_functions_details' scopes in the HTTP
+    Authorization header.
+
 func (r *FunctionVersionService) New(ctx context.Context, functionID string, body FunctionVersionNewParams, opts ...option.RequestOption) (res *CreateFunctionResponse, err error)
     Creates a version of the specified function within the authenticated NVIDIA
     Cloud Account. Requires a bearer token with 'register_function' scope in the
     HTTP Authorization header.
+
+type GetPositionInQueueResponse struct {
+	// Function id
+	FunctionID string `json:"functionId,required" format:"uuid"`
+	// Function version id
+	FunctionVersionID string `json:"functionVersionId,required" format:"uuid"`
+	// Position of request in queue
+	PositionInQueue int64                          `json:"positionInQueue"`
+	JSON            getPositionInQueueResponseJSON `json:"-"`
+}
+    Request position in queue for invocation request
+
+func (r *GetPositionInQueueResponse) UnmarshalJSON(data []byte) (err error)
+
+type GetQueuesResponse = shared.GetQueuesResponse
+    Request queue details of all the functions with same id in an account
+
+    This is an alias to an internal type.
+
+type GetQueuesResponseQueue = shared.GetQueuesResponseQueue
+    Data Transfer Object(DTO) representing a request queue for function version
+
+    This is an alias to an internal type.
+
+type GetQueuesResponseQueuesFunctionStatus = shared.GetQueuesResponseQueuesFunctionStatus
+    Function status
+
+    This is an alias to an internal type.
 
 type InvokeFunctionResponse = shared.InvokeFunctionResponse
     Response body with result from a request for executing a job/task as a cloud
@@ -2304,61 +2285,83 @@ const (
 )
 func (r ListFunctionsResponseFunctionsStatus) IsKnown() bool
 
-type QueueDetailQueueFunctionListResponse struct {
-	// Function id
-	FunctionID string `json:"functionId,required" format:"uuid"`
-	// Details of all the queues associated with same named functions
-	Queues []QueueDetailQueueFunctionListResponseQueue `json:"queues,required"`
-	JSON   queueDetailQueueFunctionListResponseJSON    `json:"-"`
+type PexecService struct {
+	Options []option.RequestOption
+	Status  *PexecStatusService
 }
-    Request queue details of all the functions with same id in an account
+    PexecService contains methods and other services that help with interacting
+    with the nvcf API.
 
-func (r *QueueDetailQueueFunctionListResponse) UnmarshalJSON(data []byte) (err error)
+    Note, unlike clients, this service does not read variables from the
+    environment automatically. You should not instantiate this service directly,
+    and instead use the NewPexecService method instead.
 
-type QueueDetailQueueFunctionListResponseQueue struct {
-	// Function name
-	FunctionName string `json:"functionName,required"`
-	// Function status
-	FunctionStatus QueueDetailQueueFunctionListResponseQueuesFunctionStatus `json:"functionStatus,required"`
-	// Function version id
-	FunctionVersionID string `json:"functionVersionId,required" format:"uuid"`
-	// Approximate number of messages in the request queue
-	QueueDepth int64                                         `json:"queueDepth"`
-	JSON       queueDetailQueueFunctionListResponseQueueJSON `json:"-"`
+func NewPexecService(opts ...option.RequestOption) (r *PexecService)
+    NewPexecService generates a new service that applies the given options to
+    each request. These options are applied after the parent client's options
+    (if there is one), and before any request-specific options.
+
+type PexecStatusGetParams struct {
+	NvcfPollSeconds param.Field[int64] `header:"NVCF-POLL-SECONDS"`
 }
-    Data Transfer Object(DTO) representing a request queue for function version
 
-func (r *QueueDetailQueueFunctionListResponseQueue) UnmarshalJSON(data []byte) (err error)
+type PexecStatusGetResponse struct {
+	Char     string                     `json:"char"`
+	Direct   bool                       `json:"direct"`
+	Double   float64                    `json:"double"`
+	Float    float64                    `json:"float"`
+	Int      int64                      `json:"int"`
+	Long     int64                      `json:"long"`
+	ReadOnly bool                       `json:"readOnly"`
+	Short    int64                      `json:"short"`
+	JSON     pexecStatusGetResponseJSON `json:"-"`
+}
 
-type QueueDetailQueueFunctionListResponseQueuesFunctionStatus string
-    Function status
+func (r *PexecStatusGetResponse) UnmarshalJSON(data []byte) (err error)
 
-const (
-	QueueDetailQueueFunctionListResponseQueuesFunctionStatusActive    QueueDetailQueueFunctionListResponseQueuesFunctionStatus = "ACTIVE"
-	QueueDetailQueueFunctionListResponseQueuesFunctionStatusDeploying QueueDetailQueueFunctionListResponseQueuesFunctionStatus = "DEPLOYING"
-	QueueDetailQueueFunctionListResponseQueuesFunctionStatusError     QueueDetailQueueFunctionListResponseQueuesFunctionStatus = "ERROR"
-	QueueDetailQueueFunctionListResponseQueuesFunctionStatusInactive  QueueDetailQueueFunctionListResponseQueuesFunctionStatus = "INACTIVE"
-	QueueDetailQueueFunctionListResponseQueuesFunctionStatusDeleted   QueueDetailQueueFunctionListResponseQueuesFunctionStatus = "DELETED"
-)
-func (r QueueDetailQueueFunctionListResponseQueuesFunctionStatus) IsKnown() bool
+type PexecStatusService struct {
+	Options []option.RequestOption
+}
+    PexecStatusService contains methods and other services that help with
+    interacting with the nvcf API.
 
-type QueueDetailQueueFunctionService struct {
+    Note, unlike clients, this service does not read variables from the
+    environment automatically. You should not instantiate this service directly,
+    and instead use the NewPexecStatusService method instead.
+
+func NewPexecStatusService(opts ...option.RequestOption) (r *PexecStatusService)
+    NewPexecStatusService generates a new service that applies the given options
+    to each request. These options are applied after the parent client's options
+    (if there is one), and before any request-specific options.
+
+func (r *PexecStatusService) Get(ctx context.Context, requestID string, query PexecStatusGetParams, opts ...option.RequestOption) (res *PexecStatusGetResponse, err error)
+    Retrieves the status of an in-progress or pending request using its
+    unique invocation request ID. If the result is available, it will be
+    included in the response, marking the request as fulfilled. Conversely,
+    if the result is not yet available, the request is deemed pending. Access
+    to this endpoint mandates inclusion of either a bearer token or an api-key
+    with 'invoke_function' scope in the HTTP Authorization header. In-progress
+    responses are returned in order. If no in-progress response is received
+    during polling you will receive the most recent in-progress response.
+    Only the first 256 unread in-progress messages are kept.
+
+type QueueFunctionService struct {
 	Options  []option.RequestOption
-	Versions *QueueDetailQueueFunctionVersionService
+	Versions *QueueFunctionVersionService
 }
-    QueueDetailQueueFunctionService contains methods and other services that
-    help with interacting with the nvcf API.
+    QueueFunctionService contains methods and other services that help with
+    interacting with the nvcf API.
 
     Note, unlike clients, this service does not read variables from the
     environment automatically. You should not instantiate this service directly,
-    and instead use the NewQueueDetailQueueFunctionService method instead.
+    and instead use the NewQueueFunctionService method instead.
 
-func NewQueueDetailQueueFunctionService(opts ...option.RequestOption) (r *QueueDetailQueueFunctionService)
-    NewQueueDetailQueueFunctionService generates a new service that applies the
-    given options to each request. These options are applied after the parent
-    client's options (if there is one), and before any request-specific options.
+func NewQueueFunctionService(opts ...option.RequestOption) (r *QueueFunctionService)
+    NewQueueFunctionService generates a new service that applies the given
+    options to each request. These options are applied after the parent client's
+    options (if there is one), and before any request-specific options.
 
-func (r *QueueDetailQueueFunctionService) List(ctx context.Context, functionID string, opts ...option.RequestOption) (res *QueueDetailQueueFunctionListResponse, err error)
+func (r *QueueFunctionService) List(ctx context.Context, functionID string, opts ...option.RequestOption) (res *shared.GetQueuesResponse, err error)
     Provides details of all the queues associated with the specified function.
     If a function has multiple versions and they are all deployed, then the
     response includes details of all the queues. If the specified function is
@@ -2366,62 +2369,22 @@ func (r *QueueDetailQueueFunctionService) List(ctx context.Context, functionID s
     token or an api-key with 'queue_details' scope in the HTTP Authorization
     header.
 
-type QueueDetailQueueFunctionVersionGetResponse struct {
-	// Function id
-	FunctionID string `json:"functionId,required" format:"uuid"`
-	// Details of all the queues associated with same named functions
-	Queues []QueueDetailQueueFunctionVersionGetResponseQueue `json:"queues,required"`
-	JSON   queueDetailQueueFunctionVersionGetResponseJSON    `json:"-"`
-}
-    Request queue details of all the functions with same id in an account
-
-func (r *QueueDetailQueueFunctionVersionGetResponse) UnmarshalJSON(data []byte) (err error)
-
-type QueueDetailQueueFunctionVersionGetResponseQueue struct {
-	// Function name
-	FunctionName string `json:"functionName,required"`
-	// Function status
-	FunctionStatus QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus `json:"functionStatus,required"`
-	// Function version id
-	FunctionVersionID string `json:"functionVersionId,required" format:"uuid"`
-	// Approximate number of messages in the request queue
-	QueueDepth int64                                               `json:"queueDepth"`
-	JSON       queueDetailQueueFunctionVersionGetResponseQueueJSON `json:"-"`
-}
-    Data Transfer Object(DTO) representing a request queue for function version
-
-func (r *QueueDetailQueueFunctionVersionGetResponseQueue) UnmarshalJSON(data []byte) (err error)
-
-type QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus string
-    Function status
-
-const (
-	QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatusActive    QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus = "ACTIVE"
-	QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatusDeploying QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus = "DEPLOYING"
-	QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatusError     QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus = "ERROR"
-	QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatusInactive  QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus = "INACTIVE"
-	QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatusDeleted   QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus = "DELETED"
-)
-func (r QueueDetailQueueFunctionVersionGetResponseQueuesFunctionStatus) IsKnown() bool
-
-type QueueDetailQueueFunctionVersionService struct {
+type QueueFunctionVersionService struct {
 	Options []option.RequestOption
 }
-    QueueDetailQueueFunctionVersionService contains methods and other services
-    that help with interacting with the nvcf API.
+    QueueFunctionVersionService contains methods and other services that help
+    with interacting with the nvcf API.
 
     Note, unlike clients, this service does not read variables from the
     environment automatically. You should not instantiate this service directly,
-    and instead use the NewQueueDetailQueueFunctionVersionService method
-    instead.
+    and instead use the NewQueueFunctionVersionService method instead.
 
-func NewQueueDetailQueueFunctionVersionService(opts ...option.RequestOption) (r *QueueDetailQueueFunctionVersionService)
-    NewQueueDetailQueueFunctionVersionService generates a new service that
-    applies the given options to each request. These options are applied
-    after the parent client's options (if there is one), and before any
-    request-specific options.
+func NewQueueFunctionVersionService(opts ...option.RequestOption) (r *QueueFunctionVersionService)
+    NewQueueFunctionVersionService generates a new service that applies the
+    given options to each request. These options are applied after the parent
+    client's options (if there is one), and before any request-specific options.
 
-func (r *QueueDetailQueueFunctionVersionService) Get(ctx context.Context, functionID string, versionID string, opts ...option.RequestOption) (res *QueueDetailQueueFunctionVersionGetResponse, err error)
+func (r *QueueFunctionVersionService) List(ctx context.Context, functionID string, versionID string, opts ...option.RequestOption) (res *shared.GetQueuesResponse, err error)
     Provides details of all the queues associated with the specified function.
     If a function has multiple versions and they are all deployed, then the
     response includes details of all the queues. If the specified function is
@@ -2429,79 +2392,122 @@ func (r *QueueDetailQueueFunctionVersionService) Get(ctx context.Context, functi
     token or an api-key with 'queue_details' scope in the HTTP Authorization
     header.
 
-type QueueDetailQueuePositionGetResponse struct {
-	// Function id
-	FunctionID string `json:"functionId,required" format:"uuid"`
-	// Function version id
-	FunctionVersionID string `json:"functionVersionId,required" format:"uuid"`
-	// Position of request in queue
-	PositionInQueue int64                                   `json:"positionInQueue"`
-	JSON            queueDetailQueuePositionGetResponseJSON `json:"-"`
-}
-    Request position in queue for invocation request
-
-func (r *QueueDetailQueuePositionGetResponse) UnmarshalJSON(data []byte) (err error)
-
-type QueueDetailQueuePositionService struct {
+type QueuePositionService struct {
 	Options []option.RequestOption
 }
-    QueueDetailQueuePositionService contains methods and other services that
-    help with interacting with the nvcf API.
+    QueuePositionService contains methods and other services that help with
+    interacting with the nvcf API.
 
     Note, unlike clients, this service does not read variables from the
     environment automatically. You should not instantiate this service directly,
-    and instead use the NewQueueDetailQueuePositionService method instead.
+    and instead use the NewQueuePositionService method instead.
 
-func NewQueueDetailQueuePositionService(opts ...option.RequestOption) (r *QueueDetailQueuePositionService)
-    NewQueueDetailQueuePositionService generates a new service that applies the
-    given options to each request. These options are applied after the parent
-    client's options (if there is one), and before any request-specific options.
+func NewQueuePositionService(opts ...option.RequestOption) (r *QueuePositionService)
+    NewQueuePositionService generates a new service that applies the given
+    options to each request. These options are applied after the parent client's
+    options (if there is one), and before any request-specific options.
 
-func (r *QueueDetailQueuePositionService) Get(ctx context.Context, requestID string, opts ...option.RequestOption) (res *QueueDetailQueuePositionGetResponse, err error)
+func (r *QueuePositionService) Get(ctx context.Context, requestID string, opts ...option.RequestOption) (res *GetPositionInQueueResponse, err error)
     Using the specified function invocation request id, returns the estimated
     position of the corresponding message up to 1000 in the queue. Requires
     a bearer token or an api-key with 'queue_details' scope in the HTTP
     Authorization header.
 
-type QueueDetailQueueService struct {
+type QueueService struct {
 	Options   []option.RequestOption
-	Functions *QueueDetailQueueFunctionService
-	Position  *QueueDetailQueuePositionService
+	Functions *QueueFunctionService
+	Position  *QueuePositionService
 }
-    QueueDetailQueueService contains methods and other services that help with
-    interacting with the nvcf API.
+    QueueService contains methods and other services that help with interacting
+    with the nvcf API.
 
     Note, unlike clients, this service does not read variables from the
     environment automatically. You should not instantiate this service directly,
-    and instead use the NewQueueDetailQueueService method instead.
+    and instead use the NewQueueService method instead.
 
-func NewQueueDetailQueueService(opts ...option.RequestOption) (r *QueueDetailQueueService)
-    NewQueueDetailQueueService generates a new service that applies the given
-    options to each request. These options are applied after the parent client's
-    options (if there is one), and before any request-specific options.
-
-type QueueDetailService struct {
-	Options []option.RequestOption
-	Queues  *QueueDetailQueueService
-}
-    QueueDetailService contains methods and other services that help with
-    interacting with the nvcf API.
-
-    Note, unlike clients, this service does not read variables from the
-    environment automatically. You should not instantiate this service directly,
-    and instead use the NewQueueDetailService method instead.
-
-func NewQueueDetailService(opts ...option.RequestOption) (r *QueueDetailService)
-    NewQueueDetailService generates a new service that applies the given options
-    to each request. These options are applied after the parent client's options
+func NewQueueService(opts ...option.RequestOption) (r *QueueService)
+    NewQueueService generates a new service that applies the given options to
+    each request. These options are applied after the parent client's options
     (if there is one), and before any request-specific options.
+
+type UserSecretManagementFunctionService struct {
+	Options  []option.RequestOption
+	Versions *UserSecretManagementFunctionVersionService
+}
+    UserSecretManagementFunctionService contains methods and other services that
+    help with interacting with the nvcf API.
+
+    Note, unlike clients, this service does not read variables from the
+    environment automatically. You should not instantiate this service directly,
+    and instead use the NewUserSecretManagementFunctionService method instead.
+
+func NewUserSecretManagementFunctionService(opts ...option.RequestOption) (r *UserSecretManagementFunctionService)
+    NewUserSecretManagementFunctionService generates a new service that applies
+    the given options to each request. These options are applied after the
+    parent client's options (if there is one), and before any request-specific
+    options.
+
+type UserSecretManagementFunctionVersionService struct {
+	Options []option.RequestOption
+}
+    UserSecretManagementFunctionVersionService contains methods and other
+    services that help with interacting with the nvcf API.
+
+    Note, unlike clients, this service does not read variables from the
+    environment automatically. You should not instantiate this service directly,
+    and instead use the NewUserSecretManagementFunctionVersionService method
+    instead.
+
+func NewUserSecretManagementFunctionVersionService(opts ...option.RequestOption) (r *UserSecretManagementFunctionVersionService)
+    NewUserSecretManagementFunctionVersionService generates a new service
+    that applies the given options to each request. These options are applied
+    after the parent client's options (if there is one), and before any
+    request-specific options.
+
+func (r *UserSecretManagementFunctionVersionService) UpdateSecrets(ctx context.Context, functionID string, versionID string, body UserSecretManagementFunctionVersionUpdateSecretsParams, opts ...option.RequestOption) (err error)
+    Updates secrets for the specified function version. This endpoint requires
+    either a bearer token or an api-key with 'update_secrets' scope in the HTTP
+    Authorization header.
+
+type UserSecretManagementFunctionVersionUpdateSecretsParams struct {
+	// Secrets
+	Secrets param.Field[[]UserSecretManagementFunctionVersionUpdateSecretsParamsSecret] `json:"secrets,required"`
+}
+
+func (r UserSecretManagementFunctionVersionUpdateSecretsParams) MarshalJSON() (data []byte, err error)
+
+type UserSecretManagementFunctionVersionUpdateSecretsParamsSecret struct {
+	// Secret name
+	Name param.Field[string] `json:"name,required"`
+	// Secret value
+	Value param.Field[string] `json:"value,required"`
+}
+    Data Transfer Object(DTO) representing secret name/value pair
+
+func (r UserSecretManagementFunctionVersionUpdateSecretsParamsSecret) MarshalJSON() (data []byte, err error)
+
+type UserSecretManagementService struct {
+	Options   []option.RequestOption
+	Functions *UserSecretManagementFunctionService
+}
+    UserSecretManagementService contains methods and other services that help
+    with interacting with the nvcf API.
+
+    Note, unlike clients, this service does not read variables from the
+    environment automatically. You should not instantiate this service directly,
+    and instead use the NewUserSecretManagementService method instead.
+
+func NewUserSecretManagementService(opts ...option.RequestOption) (r *UserSecretManagementService)
+    NewUserSecretManagementService generates a new service that applies the
+    given options to each request. These options are applied after the parent
+    client's options (if there is one), and before any request-specific options.
 
 package internal // import "github.com/tmc/nvcf-go/internal"
 
 
 CONSTANTS
 
-const PackageVersion = "0.1.0-alpha.1" // x-release-please-version
+const PackageVersion = "0.1.0-alpha.2" // x-release-please-version
 package option // import "github.com/tmc/nvcf-go/option"
 
 
@@ -2522,6 +2528,10 @@ type RequestOption = func(*requestconfig.RequestConfig) error
     about this functional options pattern in our README.
 
 [README]: https://pkg.go.dev/github.com/tmc/nvcf-go#readme-requestoptions
+
+func WithAuthToken(value string) RequestOption
+    WithAuthToken returns a RequestOption that sets the client setting
+    "auth_token".
 
 func WithBaseURL(base string) RequestOption
     WithBaseURL returns a RequestOption that sets the BaseURL for the client.
@@ -2850,6 +2860,44 @@ const (
 	FunctionResponseFunctionStatusDeleted   FunctionResponseFunctionStatus = "DELETED"
 )
 func (r FunctionResponseFunctionStatus) IsKnown() bool
+
+type GetQueuesResponse struct {
+	// Function id
+	FunctionID string `json:"functionId,required" format:"uuid"`
+	// Details of all the queues associated with same named functions
+	Queues []GetQueuesResponseQueue `json:"queues,required"`
+	JSON   getQueuesResponseJSON    `json:"-"`
+}
+    Request queue details of all the functions with same id in an account
+
+func (r *GetQueuesResponse) UnmarshalJSON(data []byte) (err error)
+
+type GetQueuesResponseQueue struct {
+	// Function name
+	FunctionName string `json:"functionName,required"`
+	// Function status
+	FunctionStatus GetQueuesResponseQueuesFunctionStatus `json:"functionStatus,required"`
+	// Function version id
+	FunctionVersionID string `json:"functionVersionId,required" format:"uuid"`
+	// Approximate number of messages in the request queue
+	QueueDepth int64                      `json:"queueDepth"`
+	JSON       getQueuesResponseQueueJSON `json:"-"`
+}
+    Data Transfer Object(DTO) representing a request queue for function version
+
+func (r *GetQueuesResponseQueue) UnmarshalJSON(data []byte) (err error)
+
+type GetQueuesResponseQueuesFunctionStatus string
+    Function status
+
+const (
+	GetQueuesResponseQueuesFunctionStatusActive    GetQueuesResponseQueuesFunctionStatus = "ACTIVE"
+	GetQueuesResponseQueuesFunctionStatusDeploying GetQueuesResponseQueuesFunctionStatus = "DEPLOYING"
+	GetQueuesResponseQueuesFunctionStatusError     GetQueuesResponseQueuesFunctionStatus = "ERROR"
+	GetQueuesResponseQueuesFunctionStatusInactive  GetQueuesResponseQueuesFunctionStatus = "INACTIVE"
+	GetQueuesResponseQueuesFunctionStatusDeleted   GetQueuesResponseQueuesFunctionStatus = "DELETED"
+)
+func (r GetQueuesResponseQueuesFunctionStatus) IsKnown() bool
 
 type InvokeFunctionResponse struct {
 	// Error code from the container while executing cloud function.
