@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elastic NIM &mdash; NVIDIA Cloud Functions latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme-switcher-general.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/omni-style-dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/api-styles-dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/omni-style.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/api-styles.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/mermaid-init.js"></script>
+        <script src="../_static/external-links.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/theme-setter.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+        <script src="../_static/version.js"></script>
+        <script src="../_static/social-media.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" />
+ 
+
+    <script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" ></script>
+    
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+<a href="../index.html">
+  <img src="../_static/nvidia-logo-white.png" class="logo" alt="Logo"/>
+</a>
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">NVIDIA Cloud Functions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Elastic NIM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#about-nim">About NIM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ngc-authentication">NGC Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-the-nim">Download the NIM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#export-the-ngc-api-key">Export the NGC API Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ngc-cli-tool">NGC CLI Tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docker-login-to-ngc">Docker Login to NGC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-available-nims">List Available NIMs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#upload-nim-to-private-registry">Upload NIM to Private Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-the-function">Create the Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validating-the-function-deployment">Validating the Function Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-lifecycle.html">Function Lifecycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-creation.html">Function Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-deployment.html">Function Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-management.html">Function Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-monitoring.html">Function Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-permissions.html">Function Permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assets.html">Asset Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster-management.html">Cluster Setup &amp; Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="account-access.html">NGC Account Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NVIDIA Cloud Functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+
+
+<li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+  
+<li>Elastic NIM</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+<li class="wy-breadcrumbs-aside">
+
+  <span>&nbsp;</span>
+</li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="elastic-nim">
+<h1>Elastic NIM<a class="headerlink" href="#elastic-nim" title="Permalink to this headline"></a></h1>
+<p>NVIDIA Elastic NIM is a managed AI inference service fabric enabling enterprises to seamlessly deploy and scale private Generative AI model endpoints securely on distributed accelerated cloud or data center infrastructure. Orchestrated and managed by NVIDIA, proprietary data never leaves the secure tenancy of enterprise hybrid virtual private clouds (VPCs).</p>
+<p>NVIDIA Elastic NIM inference services for Llama 3.x are now available for enterprises to securely scale across any accelerated computing infrastructure. This guide gives a step-by-step guide for creating and deploying the llama3-8b-instruct NIM as a function on NVIDIA Cloud Functions (NVCF).</p>
+<section id="about-nim">
+<h2>About NIM<a class="headerlink" href="#about-nim" title="Permalink to this headline"></a></h2>
+<p>NVIDIA NIM is a set of easy-to-use microservices designed to accelerate the deployment of foundation models for generative AI applications across various computing environments. Enterprises have two options when deploying NVIDIA NIM in production - they can subscribe to the Elastic NIM service deployed and managed by NVIDIA, in their virtual private cloud or DGX Cloud or export, deploy and self-manage a NIM themselves.</p>
+<p>Leveraging NVIDIA NIMs, and the NVIDIA Elastic NIM service ensures optimized performance at scale and the reliability of a managed service, along with data privacy and proximity. Key enterprise features and benefits include:</p>
+<ul class="simple">
+<li><p>Deployed in the customer VPC, NVIDIA Elastic NIM enables enterprises to comply with corporate governance and maintain the security of proprietary data.</p></li>
+<li><p>Ensures NVIDIA optimized performance on any accelerated infrastructure and is based on NVIDIA’s best practices for data center scale control plane and cluster management.</p></li>
+<li><p>Unified orchestration across hybrid clouds ensures high availability and utilization across distributed accelerated compute clusters.</p></li>
+<li><p>Ongoing network performance optimization for full-stack acceleration</p></li>
+<li><p>Burst to DGX Cloud on-demand</p></li>
+<li><p>NVIDIA Enterprise Support and service level agreements for production AI workflows.</p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"></a></h2>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline"></a></h3>
+<ul>
+<li><p>Access to a Kubernetes cluster with available GPU nodes.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Register Kubernetes cluster with NVCF using the NVIDIA Cluster Agent and configure cluster.</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Please refer to the <a class="reference internal" href="cluster-management.html#cluster-setup-management"><span class="std std-ref">Cluster Setup &amp; Management</span></a> for additional prerequisites and step-by-step instructions.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Access to a client Workstation or Server.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Install Docker or Podman client</p></li>
+<li><p>Install Kubernetes client (kubectl) with access to the backend Kubernetes API</p></li>
+<li><p>Ensure the client workstation/server can download files from NVIDIA NGC.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>NVIDIA NGC Account with access to the <a class="reference external" href="https://www.nvidia.com/en-us/data-center/products/ai-enterprise/">Enterprise Catalog</a> and a private registry.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please refer to the <a class="reference external" href="https://docs.nvidia.com/ngc/gpu-cloud/ngc-private-registry-user-guide/index.html#">NGC Private Registry User Guide</a> for more details. The private registry will be used in a later step for storing llama3-8b-instruct NIM.</p>
+</div>
+</section>
+</section>
+<section id="ngc-authentication">
+<h2>NGC Authentication<a class="headerlink" href="#ngc-authentication" title="Permalink to this headline"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>An NGC Pesronal API Key is required to access NGC resources and a key can be generated <a class="reference external" href="https://org.ngc.nvidia.com/setup/personal-keys">here</a>.</p>
+</div>
+<p>Create a NGC Personal API Key and ensure that the following is selected from the “Services Included” dropdown:</p>
+<ul class="simple">
+<li><p>Cloud Functions</p></li>
+<li><p>AI Foundation Models and Endpoints</p></li>
+<li><p>NGC Catalog</p></li>
+<li><p>Private Registry</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/elastic-nim-image3.png"><img alt="../_images/elastic-nim-image3.png" src="../_images/elastic-nim-image3.png" style="width: 5.1875in; height: 5.26042in;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Personal keys allow you to configure an expiration date, revoke or delete the key using an action button, and rotate the key as needed. For more information about key types, please refer to the <a class="reference external" href="https://docs.nvidia.com/ngc/gpu-cloud/ngc-user-guide/index.html#ngc-api-keys">NGC User Guide</a>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Keep your key secret and in a safe place. Do not share it or store it in a place where others can see or copy it.</p>
+</div>
+</section>
+<section id="download-the-nim">
+<h2>Download the NIM<a class="headerlink" href="#download-the-nim" title="Permalink to this headline"></a></h2>
+<p>Execute the following on the client workstation/server to download the llama3-8b-instruct NIM from the public registry in NGC.</p>
+<section id="export-the-ngc-api-key">
+<h3>Export the NGC API Key<a class="headerlink" href="#export-the-ngc-api-key" title="Permalink to this headline"></a></h3>
+<p>Pass the value of the API Key to the docker run command as the <code class="docutils literal notranslate"><span class="pre">API_KEY</span></code> environment variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#NGC Organization ID. The name of the org, not the display name</span>
+<span class="nb">export</span> <span class="nv">ORG_NAME</span><span class="o">=</span>&lt;org_name&gt;
+
+<span class="c1">#NGC Personal API Key. Starts with nvapi-</span>
+<span class="nb">export</span> <span class="nv">API_KEY</span><span class="o">=</span>&lt;your_key_here&gt;
+</pre></div>
+</div>
+</section>
+<section id="ngc-cli-tool">
+<h3>NGC CLI Tool<a class="headerlink" href="#ngc-cli-tool" title="Permalink to this headline"></a></h3>
+<p>This documentation uses the NGC CLI tool in a few of the steps. See the <a class="reference external" href="https://docs.ngc.nvidia.com/cli/index.html">NGC CLI documentation</a> for information on downloading and configuring the tool.</p>
+</section>
+<section id="docker-login-to-ngc">
+<h3>Docker Login to NGC<a class="headerlink" href="#docker-login-to-ngc" title="Permalink to this headline"></a></h3>
+<p>To pull the NIM container image from NGC, first authenticate with the NVIDIA Container Registry with the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># with docker</span>
+$ docker login nvcr.io
+Username: <span class="nv">$oauthtoken</span>
+Password: <span class="nv">$API_KEY</span>
+
+<span class="c1">#with podman</span>
+$ podman login nvcr.io
+Username: <span class="nv">$oauthtoken</span>
+Password: <span class="nv">$API_KEY</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">$oauthtoken</span></code> as the username and <code class="docutils literal notranslate"><span class="pre">API_KEY</span></code> as the password. The <code class="docutils literal notranslate"><span class="pre">$oauthtoken</span></code> username is a special name that indicates that you will authenticate with an API key and not a username and password.</p>
+</div>
+</section>
+<section id="list-available-nims">
+<h3>List Available NIMs<a class="headerlink" href="#list-available-nims" title="Permalink to this headline"></a></h3>
+<p>NVIDIA regularly publishes new models that are available as downloadable NIMs to NVIDIA AI Enterprise customers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use the <a class="reference external" href="https://docs.ngc.nvidia.com/cli/cmd.html">NGC cli</a> to see a list of available NIMs.</p>
+</div>
+<ul>
+<li><p>Use the following command to list the available NIMs, in CSV format.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ngc registry image list --format_type csv nvcr.io/nim/meta/<span class="se">\*</span>
+</pre></div>
+</div>
+<p>This should produce something like the following.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Name,Repository,Latest Tag,Image Size,Updated Date,Permission,Signed Tag?,Access Type,Associated Products
+Llama3-70b-instruct,nim/meta/llama3-70b-instruct,1.0.0,5.96 GB,<span class="s2">&quot;Jun 01, 2024&quot;</span>,unlocked,True,LISTED,<span class="s2">&quot;nv-ai-enterprise, nvidia-nim-da&quot;</span>
+Llama3-8b-instruct,nim/meta/llama3-8b-instruct,1.0.0,5.96 GB,<span class="s2">&quot;Jun 01, 2024&quot;</span>,unlocked,True,LISTED,<span class="s2">&quot;nv-ai-enterprise, nvidia-nim-da&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You will use the <strong>Repository</strong> and <strong>Latest Tag</strong> fields when you call the docker run command, in an upcoming step.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once the NIM has been downloaded, you will upload it to the NGC private registry.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Download the NIM container image using either docker or podman.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># with docker</span>
+docker pull nvcr.io/nim/meta/llama3-8b-instruct:1.0.0
+<span class="c1"># with podman</span>
+podman pull nvcr.io/nim/meta/llama3-8b-instruct:1.0.0
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you would like to customize the NIM image prior to uploading to the private registry, create a Dockerfile using NIM as the base image. See the <a class="reference external" href="https://github.com/NVIDIA/nim-deploy/tree/main/cloud-service-providers/nvidia/nvcf">example</a> in the nim-deploy repository as a reference.</p>
+</div>
+</section>
+</section>
+<section id="upload-nim-to-private-registry">
+<h2>Upload NIM to Private Registry<a class="headerlink" href="#upload-nim-to-private-registry" title="Permalink to this headline"></a></h2>
+<p>NVCF requires the NIM container image to exist in the private registry prior to creating the function.</p>
+<ul>
+<li><p>Tag the image with the NGC Org name that has NVCF enabled and name the image to nvcf-nim with the tag meta-llama3-8b-instruct.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#with docker</span>
+docker tag nvcr.io/nim/meta/llama3-8b-instruct:1.0.0 nvcr.io/<span class="nv">$ORG_NAME</span>/nvcf-nim:meta-llama3-8b-instruct
+<span class="c1">#with podman</span>
+podman tag nvcr.io/nim/meta/llama3-8b-instruct:1.0.0 nvcr.io/<span class="nv">$ORG_NAME</span>/nvcf-nim:meta-llama3-8b-instruct
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Push the image to Private Registry</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># with docker</span>
+docker push nvcr.io/<span class="nv">$ORG_NAME</span>/nvcf-nim:meta-llama3-8b-instruct
+
+<span class="c1">#with podman</span>
+podman push nvcr.io/<span class="nv">$ORG_NAME</span>/nvcf-nim:meta-llama3-8b-instruct
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="create-the-function">
+<h2>Create the Function<a class="headerlink" href="#create-the-function" title="Permalink to this headline"></a></h2>
+<p>Now that the llama3-8b-instruct NIM has been downloaded and uploaded to the private registry, next, we will add the NVCF function logic and dependencies.</p>
+<ul>
+<li><p>In the NGC NVCF console, create a function from a custom container</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Function name: nvcf-nim_meta-llama3-8b-instruct</p></li>
+</ul>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/elastic-nim-image5.png"><img alt="../_images/elastic-nim-image5.png" src="../_images/elastic-nim-image5.png" style="width: 6.5in; height: 1.70833in;" /></a>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Define the following settings for the function:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Container: Choose the image from the drop-down</p></li>
+<li><p>Tag: Choose from the available tags in the drop-down</p></li>
+<li><p>Models: leave blank</p></li>
+<li><p>Inference Protocol: <code class="docutils literal notranslate"><span class="pre">HTTP</span></code></p></li>
+<li><p>Inference Endpoint: <code class="docutils literal notranslate"><span class="pre">/v1/chat/completions</span></code></p></li>
+<li><p>Health Path: <code class="docutils literal notranslate"><span class="pre">/v1/health/ready</span></code></p></li>
+<li><p>Environment Key: <code class="docutils literal notranslate"><span class="pre">NGC_API_KEY</span></code></p></li>
+<li><p>Environment Value: Enter the value of your NGC Personal API Key. <code class="docutils literal notranslate"><span class="pre">$API_KEY</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>NIM will download the llama3-8b-instruct model from NGC during startup to the container’s ephemeral disk.</p>
+</div>
+<a class="reference internal image-reference" href="../_images/elastic-nim-image6.png"><img alt="../_images/elastic-nim-image6.png" src="../_images/elastic-nim-image6.png" style="width: 6.5in; height: 5.45833in;" /></a>
+</div></blockquote>
+</li>
+<li><p>Click Create Function</p></li>
+<li><p>Deploy the Function to a backend cluster by clicking Deploy Version</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/elastic-nim-image4.png"><img alt="../_images/elastic-nim-image4.png" src="../_images/elastic-nim-image4.png" style="width: 6.5in; height: 1.98611in;" /></a>
+</div></blockquote>
+</li>
+<li><p>Within the Deploy Function dialog, fill in the following required fields:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Function Name: prepopulated function name</p></li>
+<li><p>Function Version: prepopulated latest function version</p></li>
+<li><p>Backend: A collection of one or more (though usually one) clusters to deploy on, for example - a CSP such as Azure, OCI, GCP or an NVIDIA-specific cluster like GFN.</p></li>
+<li><p>GPU: prepopulated GPU model</p></li>
+<li><p>Instance Type: Each GPU type can support one or more instance types, which are different configurations, such as the number of CPU cores, and the number of GPUs per node.</p></li>
+<li><p>Max Concurrency: The number of simultaneous invocations your container can handle at any given time</p></li>
+<li><p>Min Instances: The minimum number of instances your function should be deployed on</p></li>
+<li><p>Max Instances: The maximum number of instances your function is allowed to autoscale to</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/elastic-nim-image1.png"><img alt="../_images/elastic-nim-image1.png" src="../_images/elastic-nim-image1.png" style="width: 6.5in; height: 2.06944in;" /></a>
+</div></blockquote>
+</li>
+<li><p>Click Deploy Function.</p>
+<blockquote>
+<div><p>The following dialog will be displayed. The Function will change states from Deploying to Active.</p>
+<a class="reference internal image-reference" href="../_images/elastic-nim-image2.png"><img alt="../_images/elastic-nim-image2.png" src="../_images/elastic-nim-image2.png" style="width: 6.5in; height: 1.45833in;" /></a>
+</div></blockquote>
+</li>
+<li><p>Set the Function ID as an environment variable for convenience. This will be used for validating/testing the function.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">FUNCTION_ID</span><span class="o">=</span>&lt;your_function_id&gt;
+$ curl -X POST <span class="s2">&quot;https://api.nvcf.nvidia.com/v2/nvcf/pexec/functions/</span><span class="si">${</span><span class="nv">FUNCTION_ID</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Authorization: Bearer </span><span class="si">${</span><span class="nv">API_KEY</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Accept: application/json&quot;</span> <span class="se">\</span>
+-H <span class="s2">&quot;Content-Type: application/json&quot;</span> <span class="se">\</span>
+-d <span class="s1">&#39;{</span>
+<span class="s1">        &quot;model&quot;: &quot;meta/llama3-8b-instruct&quot;,</span>
+<span class="s1">        &quot;messages&quot;: [</span>
+<span class="s1">            {</span>
+<span class="s1">                &quot;role&quot;:&quot;user&quot;,</span>
+<span class="s1">                &quot;content&quot;:&quot;Can you write me a happysong?&quot;</span>
+<span class="s1">            }</span>
+<span class="s1">        ],</span>
+<span class="s1">        &quot;max_tokens&quot;: 32</span>
+<span class="s1">    }&#39;</span>
+
+<span class="c1">#output</span>
+<span class="o">{</span><span class="s2">&quot;id&quot;</span>:<span class="s2">&quot;cmpl-3ae8dd639f74451e98c2a2e2873441ec&quot;</span>,<span class="s2">&quot;object&quot;</span>:<span class="s2">&quot;chat.completion&quot;</span>,<span class="s2">&quot;created&quot;</span>:1721774173,<span class="s2">&quot;model&quot;</span>:<span class="s2">&quot;meta/llama3-8b-instruct&quot;</span>,<span class="s2">&quot;choices&quot;</span>:<span class="o">[{</span><span class="s2">&quot;index&quot;</span>:0,<span class="s2">&quot;message&quot;</span>:<span class="o">{</span><span class="s2">&quot;role&quot;</span>:<span class="s2">&quot;assistant&quot;</span>,<span class="s2">&quot;content&quot;</span>:<span class="s2">&quot;I&#39;d be delighted to write a happy song for you!\n\nHere&#39;s a brand new, original song, just for you:\n\n**Title:** \&quot;Sparkle in&quot;</span><span class="o">}</span>,<span class="s2">&quot;logprobs&quot;</span>:null,<span class="s2">&quot;finish_reason&quot;</span>:<span class="s2">&quot;length&quot;</span>,<span class="s2">&quot;stop_reason&quot;</span>:null<span class="o">}]</span>,<span class="s2">&quot;usage&quot;</span>:<span class="o">{</span><span class="s2">&quot;prompt_tokens&quot;</span>:19,<span class="s2">&quot;total_tokens&quot;</span>:51,<span class="s2">&quot;completion_tokens&quot;</span>:32<span class="o">}}</span>%
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="validating-the-function-deployment">
+<h2>Validating the Function Deployment<a class="headerlink" href="#validating-the-function-deployment" title="Permalink to this headline"></a></h2>
+<p>NVCF creates a pod for the function in the `nvcf-backend` namespace. The pod might take a few minutes to initialize depending on the size of the image and environment factors.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kubectl get all -n nvcf-backend
+NAME                                            READY   STATUS    RESTARTS   AGE
+pod/0-sr-60f3f280-10a3-42bd-945a-97dd9fc1e67e   <span class="m">2</span>/2     Running   <span class="m">0</span>          10m
+</pre></div>
+</div>
+<p>During initialization, pod logs are unavailable. Monitor the event log for status</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">$</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">events</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="n">nvcf</span><span class="o">-</span><span class="n">backend</span><span class="w"></span>
+<span class="n">LAST</span><span class="w"> </span><span class="n">SEEN</span><span class="w">   </span><span class="n">TYPE</span><span class="w">     </span><span class="n">REASON</span><span class="w">                 </span><span class="n">OBJECT</span><span class="w">                                                </span><span class="n">MESSAGE</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Scheduled</span><span class="w">              </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Successfully</span><span class="w"> </span><span class="n">assigned</span><span class="w"> </span><span class="n">nvcf</span><span class="o">-</span><span class="n">backend</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">aks</span><span class="o">-</span><span class="n">ncvfgpu</span><span class="mi">-13288136</span><span class="o">-</span><span class="n">vmss000000</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Pulled</span><span class="w">                 </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Container</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="s">&quot;nvcr.io/qtfpt1h0bieu/nvcf-core/nvcf_worker_init:0.24.10&quot;</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">present</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">machine</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Created</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Created</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">init</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Started</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Started</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">init</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Pulled</span><span class="w">                 </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Container</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="s">&quot;nvcr.io/0494738860185553/nvcf-nim:meta-llama3-8b-instruct&quot;</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">present</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">machine</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Created</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Created</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">inference</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Started</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Started</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">inference</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Pulled</span><span class="w">                 </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Container</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="s">&quot;nvcr.io/qtfpt1h0bieu/nvcf-core/nvcf_worker_utils:2.24.2&quot;</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">present</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">machine</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Created</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Created</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">utils</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Started</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">         </span><span class="n">Started</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">utils</span><span class="w"></span>
+<span class="mi">25</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Killing</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="o">-</span><span class="n">dca52008</span><span class="o">-</span><span class="n">f0ae</span><span class="mi">-43</span><span class="n">ca</span><span class="mi">-9</span><span class="n">f5a</span><span class="o">-</span><span class="n">ff9c4ca8c00d</span><span class="w">         </span><span class="n">Stopping</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">inference</span><span class="w"></span>
+<span class="mi">25</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">Killing</span><span class="w">                </span><span class="n">pod</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="o">-</span><span class="n">dca52008</span><span class="o">-</span><span class="n">f0ae</span><span class="mi">-43</span><span class="n">ca</span><span class="mi">-9</span><span class="n">f5a</span><span class="o">-</span><span class="n">ff9c4ca8c00d</span><span class="w">         </span><span class="n">Stopping</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">utils</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceStatusUpdate</span><span class="w">   </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">   </span><span class="n">Request</span><span class="w"> </span><span class="n">accepted</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">processing</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceCreation</span><span class="w">       </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">   </span><span class="n">Creating</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">requested</span><span class="w"> </span><span class="n">instances</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceCreation</span><span class="w">       </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">   </span><span class="n">Created</span><span class="w"> </span><span class="n">Pod</span><span class="w"> </span><span class="n">Instance</span><span class="w"> </span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w"></span>
+<span class="mi">12</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceStatusUpdate</span><span class="w">   </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w">   </span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="mi">-60</span><span class="n">f3f280</span><span class="mi">-10</span><span class="n">a3</span><span class="mi">-42</span><span class="n">bd</span><span class="mi">-945</span><span class="n">a</span><span class="mi">-97</span><span class="n">dd9fc1e67e</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">running</span><span class="w"></span>
+<span class="mi">25</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceTermination</span><span class="w">    </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="o">-</span><span class="n">d4c0d756</span><span class="mi">-1</span><span class="n">a30</span><span class="mi">-41</span><span class="n">bd</span><span class="o">-</span><span class="n">afdb</span><span class="o">-</span><span class="n">b8f440ac5ce4</span><span class="w">   </span><span class="n">Stopped</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="n">nvcf</span><span class="o">-</span><span class="n">backend</span><span class="o">/</span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="o">-</span><span class="n">dca52008</span><span class="o">-</span><span class="n">f0ae</span><span class="mi">-43</span><span class="n">ca</span><span class="mi">-9</span><span class="n">f5a</span><span class="o">-</span><span class="n">ff9c4ca8c00d</span><span class="w"></span>
+<span class="mi">25</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceStatusUpdate</span><span class="w">   </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="o">-</span><span class="n">d4c0d756</span><span class="mi">-1</span><span class="n">a30</span><span class="mi">-41</span><span class="n">bd</span><span class="o">-</span><span class="n">afdb</span><span class="o">-</span><span class="n">b8f440ac5ce4</span><span class="w">   </span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="o">-</span><span class="n">dca52008</span><span class="o">-</span><span class="n">f0ae</span><span class="mi">-43</span><span class="n">ca</span><span class="mi">-9</span><span class="n">f5a</span><span class="o">-</span><span class="n">ff9c4ca8c00d</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">terminated</span><span class="w"></span>
+<span class="mi">23</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceTermination</span><span class="w">    </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="o">-</span><span class="n">d4c0d756</span><span class="mi">-1</span><span class="n">a30</span><span class="mi">-41</span><span class="n">bd</span><span class="o">-</span><span class="n">afdb</span><span class="o">-</span><span class="n">b8f440ac5ce4</span><span class="w">   </span><span class="n">All</span><span class="w"> </span><span class="n">instances</span><span class="w"> </span><span class="n">terminated</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">cleaned</span><span class="o">-</span><span class="n">up</span><span class="w"></span>
+<span class="mi">23</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceStatusUpdate</span><span class="w">   </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="o">-</span><span class="n">dca52008</span><span class="o">-</span><span class="n">f0ae</span><span class="mi">-43</span><span class="n">ca</span><span class="mi">-9</span><span class="n">f5a</span><span class="o">-</span><span class="n">ff9c4ca8c00d</span><span class="w">   </span><span class="mi">0</span><span class="o">-</span><span class="n">sr</span><span class="o">-</span><span class="n">dca52008</span><span class="o">-</span><span class="n">f0ae</span><span class="mi">-43</span><span class="n">ca</span><span class="mi">-9</span><span class="n">f5a</span><span class="o">-</span><span class="n">ff9c4ca8c00d</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">terminated</span><span class="w"></span>
+<span class="mi">23</span><span class="n">m</span><span class="w">         </span><span class="n">Normal</span><span class="w">   </span><span class="n">InstanceTermination</span><span class="w">    </span><span class="n">spotrequest</span><span class="o">/</span><span class="n">sr</span><span class="o">-</span><span class="n">dca52008</span><span class="o">-</span><span class="n">f0ae</span><span class="mi">-43</span><span class="n">ca</span><span class="mi">-9</span><span class="n">f5a</span><span class="o">-</span><span class="n">ff9c4ca8c00d</span><span class="w">   </span><span class="n">All</span><span class="w"> </span><span class="n">instances</span><span class="w"> </span><span class="n">terminated</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">cleaned</span><span class="o">-</span><span class="n">up</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Once running, NIM will download the model during startup if it’s not present on the disk. For large models, this can take several minutes.</p>
+<p>Example startup logs for llama3-8b-instruct</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kubectl logs <span class="m">0</span>-sr-60f3f280-10a3-42bd-945a-97dd9fc1e67e -n nvcf-backend
+Defaulted container <span class="s2">&quot;inference&quot;</span> out of: inference, utils, init <span class="o">(</span>init<span class="o">)</span>
+<span class="o">===========================================</span>
+<span class="o">==</span> NVIDIA Inference Microservice LLM <span class="nv">NIM</span> <span class="o">==</span>
+<span class="o">===========================================</span>
+NVIDIA Inference Microservice LLM NIM Version <span class="m">1</span>.0.0
+Model: nim/meta/llama3-8b-instruct
+Container image Copyright <span class="o">(</span>c<span class="o">)</span> <span class="m">2016</span>-2024, NVIDIA CORPORATION <span class="p">&amp;</span> AFFILIATES. All rights reserved.
+This NIM container is governed by the NVIDIA AI Product Agreement here:
+https://www.nvidia.com/en-us/data-center/products/nvidia-ai-enterprise/eula/.
+A copy of this license can be found under /opt/nim/LICENSE.
+The use of this model is governed by the AI Foundation Models Community License
+here: https://docs.nvidia.com/ai-foundation-models-community-license.pdf.
+ADDITIONAL INFORMATION: Meta Llama <span class="m">3</span> Community License, Built with Meta Llama <span class="m">3</span>.
+A copy of the Llama <span class="m">3</span> license can be found under /opt/nim/MODEL_LICENSE.
+<span class="m">2024</span>-07-23 <span class="m">22</span>:27:23,428 <span class="o">[</span>INFO<span class="o">]</span> PyTorch version <span class="m">2</span>.2.2 available.
+<span class="m">2024</span>-07-23 <span class="m">22</span>:27:24,016 <span class="o">[</span>WARNING<span class="o">]</span> <span class="o">[</span>TRT-LLM<span class="o">]</span> <span class="o">[</span>W<span class="o">]</span> Logger level already <span class="nb">set</span> from environment. Discard new verbosity: error
+<span class="m">2024</span>-07-23 <span class="m">22</span>:27:24,016 <span class="o">[</span>INFO<span class="o">]</span> <span class="o">[</span>TRT-LLM<span class="o">]</span> <span class="o">[</span>I<span class="o">]</span> Starting TensorRT-LLM init.
+<span class="m">2024</span>-07-23 <span class="m">22</span>:27:24,202 <span class="o">[</span>INFO<span class="o">]</span> <span class="o">[</span>TRT-LLM<span class="o">]</span> <span class="o">[</span>I<span class="o">]</span> TensorRT-LLM inited.
+<span class="o">[</span>TensorRT-LLM<span class="o">]</span> TensorRT-LLM version: <span class="m">0</span>.10.1.dev2024053000
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:24.927 api_server.py:489<span class="o">]</span> NIM LLM API version <span class="m">1</span>.0.0
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:24.929 ngc_profile.py:217<span class="o">]</span> Running NIM without LoRA. Only looking <span class="k">for</span> compatible profiles that <span class="k">do</span> not support LoRA.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:24.929 ngc_profile.py:219<span class="o">]</span> Detected <span class="m">1</span> compatible profile<span class="o">(</span>s<span class="o">)</span>.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:24.929 ngc_injector.py:106<span class="o">]</span> Valid profile: 8835c31752fbc67ef658b20a9f78e056914fdef0660206d82f252d62fd96064d <span class="o">(</span>vllm-fp16-tp1<span class="o">)</span> on GPUs <span class="o">[</span><span class="m">0</span><span class="o">]</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:24.929 ngc_injector.py:141<span class="o">]</span> Selected profile: 8835c31752fbc67ef658b20a9f78e056914fdef0660206d82f252d62fd96064d <span class="o">(</span>vllm-fp16-tp1<span class="o">)</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:25.388 ngc_injector.py:146<span class="o">]</span> Profile metadata: llm_engine: vllm
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:25.388 ngc_injector.py:146<span class="o">]</span> Profile metadata: precision: fp16
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:25.388 ngc_injector.py:146<span class="o">]</span> Profile metadata: feat_lora: <span class="nb">false</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:25.388 ngc_injector.py:146<span class="o">]</span> Profile metadata: tp: <span class="m">1</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:27:25.389 ngc_injector.py:166<span class="o">]</span> Preparing model workspace. This step might download additional files to run the model.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:14.764 ngc_injector.py:172<span class="o">]</span> Model workspace is now ready. It took <span class="m">49</span>.375 seconds
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:14.767 llm_engine.py:98<span class="o">]</span> Initializing an LLM engine <span class="o">(</span>v0.4.1<span class="o">)</span> with config: <span class="nv">model</span><span class="o">=</span><span class="s1">&#39;/tmp/meta--llama3-8b-instruct-k3_wpocb&#39;</span>, <span class="nv">speculative_config</span><span class="o">=</span>None, <span class="nv">tokenizer</span><span class="o">=</span><span class="s1">&#39;/tmp/meta--llama3-8b-instruct-k3_wpocb&#39;</span>, <span class="nv">skip_tokenizer_init</span><span class="o">=</span>False, <span class="nv">tokenizer_mode</span><span class="o">=</span>auto, <span class="nv">revision</span><span class="o">=</span>None, <span class="nv">tokenizer_revision</span><span class="o">=</span>None, <span class="nv">trust_remote_code</span><span class="o">=</span>False, <span class="nv">dtype</span><span class="o">=</span>torch.bfloat16, <span class="nv">max_seq_len</span><span class="o">=</span><span class="m">8192</span>, <span class="nv">download_dir</span><span class="o">=</span>None, <span class="nv">load_format</span><span class="o">=</span>auto, <span class="nv">tensor_parallel_size</span><span class="o">=</span><span class="m">1</span>, <span class="nv">disable_custom_all_reduce</span><span class="o">=</span>False, <span class="nv">quantization</span><span class="o">=</span>None, <span class="nv">enforce_eager</span><span class="o">=</span>False, <span class="nv">kv_cache_dtype</span><span class="o">=</span>auto, <span class="nv">quantization_param_path</span><span class="o">=</span>None, <span class="nv">device_config</span><span class="o">=</span>cuda, <span class="nv">decoding_config</span><span class="o">=</span>DecodingConfig<span class="o">(</span><span class="nv">guided_decoding_backend</span><span class="o">=</span><span class="s1">&#39;outlines&#39;</span><span class="o">)</span>, <span class="nv">seed</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+WARNING <span class="m">07</span>-23 <span class="m">22</span>:28:15.0 logging.py:314<span class="o">]</span> Special tokens have been added <span class="k">in</span> the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:15.16 utils.py:609<span class="o">]</span> Found nccl from library /usr/local/lib/python3.10/dist-packages/nvidia/nccl/lib/libnccl.so.2
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:16 selector.py:28<span class="o">]</span> Using FlashAttention backend.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:19 model_runner.py:173<span class="o">]</span> Loading model weights took <span class="m">14</span>.9595 GB
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:20.644 gpu_executor.py:119<span class="o">]</span> <span class="c1"># GPU blocks: 27793, # CPU blocks: 2048</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:22 model_runner.py:973<span class="o">]</span> Capturing the model <span class="k">for</span> CUDA graphs. This may lead to unexpected consequences <span class="k">if</span> the model is not static. To run the model <span class="k">in</span> eager mode, <span class="nb">set</span> <span class="s1">&#39;enforce_eager=True&#39;</span> or use <span class="s1">&#39;--enforce-eager&#39;</span> <span class="k">in</span> the CLI.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:22 model_runner.py:977<span class="o">]</span> CUDA graphs can take additional <span class="m">1</span>~3 GiB memory per GPU. If you are running out of memory, consider decreasing <span class="sb">`</span>gpu_memory_utilization<span class="sb">`</span> or enforcing eager mode. You can also reduce the <span class="sb">`</span>max_num_seqs<span class="sb">`</span> as needed to decrease memory usage.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:27 model_runner.py:1054<span class="o">]</span> Graph capturing finished <span class="k">in</span> <span class="m">5</span> secs.
+WARNING <span class="m">07</span>-23 <span class="m">22</span>:28:28.194 logging.py:314<span class="o">]</span> Special tokens have been added <span class="k">in</span> the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.205 serving_chat.py:347<span class="o">]</span> Using default chat template:
+<span class="o">{</span>% <span class="nb">set</span> <span class="nv">loop_messages</span> <span class="o">=</span> messages %<span class="o">}{</span>% <span class="k">for</span> message <span class="k">in</span> loop_messages %<span class="o">}{</span>% <span class="nb">set</span> <span class="nv">content</span> <span class="o">=</span> <span class="s1">&#39;&lt;|start_header_id|&gt;&#39;</span> + message<span class="o">[</span><span class="s1">&#39;role&#39;</span><span class="o">]</span> + <span class="s1">&#39;&lt;|end_header_id|&gt;</span>
+<span class="s1">&#39;</span>+ message<span class="o">[</span><span class="s1">&#39;content&#39;</span><span class="o">]</span> <span class="p">|</span> trim + <span class="s1">&#39;&lt;|eot_id|&gt;&#39;</span> %<span class="o">}{</span>% <span class="k">if</span> loop.index0 <span class="o">==</span> <span class="m">0</span> %<span class="o">}{</span>% <span class="nb">set</span> <span class="nv">content</span> <span class="o">=</span> bos_token + content %<span class="o">}{</span>% endif %<span class="o">}{{</span> content <span class="o">}}{</span>% endfor %<span class="o">}{</span>% <span class="k">if</span> add_generation_prompt %<span class="o">}{{</span> <span class="s1">&#39;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;</span>
+<span class="s1">&#39;</span> <span class="o">}}{</span>% endif %<span class="o">}</span>
+WARNING <span class="m">07</span>-23 <span class="m">22</span>:28:28.420 logging.py:314<span class="o">]</span> Special tokens have been added <span class="k">in</span> the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.431 api_server.py:456<span class="o">]</span> Serving endpoints:
+<span class="m">0</span>.0.0.0:8000/openapi.json
+<span class="m">0</span>.0.0.0:8000/docs
+<span class="m">0</span>.0.0.0:8000/docs/oauth2-redirect
+<span class="m">0</span>.0.0.0:8000/metrics
+<span class="m">0</span>.0.0.0:8000/v1/health/ready
+<span class="m">0</span>.0.0.0:8000/v1/health/live
+<span class="m">0</span>.0.0.0:8000/v1/models
+<span class="m">0</span>.0.0.0:8000/v1/version
+<span class="m">0</span>.0.0.0:8000/v1/chat/completions
+<span class="m">0</span>.0.0.0:8000/v1/completions
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.431 api_server.py:460<span class="o">]</span> An example cURL request:
+curl -X <span class="s1">&#39;POST&#39;</span> <span class="se">\</span>
+<span class="s1">&#39;http://0.0.0.0:8000/v1/chat/completions&#39;</span> <span class="se">\</span>
+-H <span class="s1">&#39;accept: application/json&#39;</span> <span class="se">\</span>
+-H <span class="s1">&#39;Content-Type: application/json&#39;</span> <span class="se">\</span>
+-d <span class="s1">&#39;{</span>
+<span class="s1">    &quot;model&quot;: &quot;meta/llama3-8b-instruct&quot;,</span>
+<span class="s1">    &quot;messages&quot;: [</span>
+<span class="s1">    {</span>
+<span class="s1">        &quot;role&quot;:&quot;user&quot;,</span>
+<span class="s1">        &quot;content&quot;:&quot;Hello! How are you?&quot;</span>
+<span class="s1">    },</span>
+<span class="s1">    {</span>
+<span class="s1">        &quot;role&quot;:&quot;assistant&quot;,</span>
+<span class="s1">        &quot;content&quot;:&quot;Hi! I am quite well, how can I help you today?&quot;</span>
+<span class="s1">    },</span>
+<span class="s1">    {</span>
+<span class="s1">        &quot;role&quot;:&quot;user&quot;,</span>
+<span class="s1">        &quot;content&quot;:&quot;Can you write me a song?&quot;</span>
+<span class="s1">    }</span>
+<span class="s1">    ],</span>
+<span class="s1">    &quot;top_p&quot;: 1,</span>
+<span class="s1">    &quot;n&quot;: 1,</span>
+<span class="s1">    &quot;max_tokens&quot;: 15,</span>
+<span class="s1">    &quot;stream&quot;: true,</span>
+<span class="s1">    &quot;frequency_penalty&quot;: 1.0,</span>
+<span class="s1">    &quot;stop&quot;: [&quot;hello&quot;]</span>
+<span class="s1">}&#39;</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.476 server.py:82<span class="o">]</span> Started server process <span class="o">[</span><span class="m">32</span><span class="o">]</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.477 on.py:48<span class="o">]</span> Waiting <span class="k">for</span> application startup.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.478 on.py:62<span class="o">]</span> Application startup complete.
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.480 server.py:214<span class="o">]</span> Uvicorn running on http://0.0.0.0:8000 <span class="o">(</span>Press CTRL+C to quit<span class="o">)</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:28.574 httptools_impl.py:481<span class="o">]</span> <span class="m">127</span>.0.0.1:40948 - <span class="s2">&quot;GET /v1/health/ready HTTP/1.1&quot;</span> <span class="m">503</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:29.75 httptools_impl.py:481<span class="o">]</span> <span class="m">127</span>.0.0.1:40962 - <span class="s2">&quot;GET /v1/health/ready HTTP/1.1&quot;</span> <span class="m">200</span>
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:38.478 metrics.py:334<span class="o">]</span> Avg prompt throughput: <span class="m">0</span>.3 tokens/s, Avg generation throughput: <span class="m">1</span>.5 tokens/s, Running: <span class="m">0</span> reqs, Swapped: <span class="m">0</span> reqs, Pending: <span class="m">0</span> reqs, GPU KV cache usage: <span class="m">0</span>.0%, CPU KV cache usage: <span class="m">0</span>.0%
+INFO <span class="m">07</span>-23 <span class="m">22</span>:28:48.478 metrics.py:334<span class="o">]</span> Avg prompt throughput: <span class="m">0</span>.0 tokens/s, Avg generation throughput: <span class="m">0</span>.0 tokens/s, Running: <span class="m">0</span> reqs, Swapped: <span class="m">0</span> reqs, Pending: <span class="m">0</span> reqs, GPU KV cache usage: <span class="m">0</span>.0%, CPU KV cache usage: <span class="m">0</span>.0%
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h2>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Issue: Pod is stuck in “Initializing”<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">This process can take several minutes. If too much time has passed, ensure the API Personal Key is valid and there are no issues in the event logs.</p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Issue: Pods are stuck in “Pending”<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Ensure GPU-enabled pods can be scheduled in the cluster. Check that a GPU is available and no taints exist that would block the scheduler. See <a class="reference external" href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/troubleshooting.html">troubleshooting the GPU operator for more information</a></p>
+</div>
+</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Issue: Inference requests to the API endpoint do not return any output<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Ensure the NGC Personal API Key in the Authorization header is correct and has appropriate access. See <a class="reference internal" href="api.html#invocation-errors"><span class="std std-ref">Statuses and Errors</span></a> for more tips.</p>
+</div>
+</details></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+<img src="../_static/NVIDIA-LogoBlack.svg" class="only-light"/>
+<img src="../_static/NVIDIA-LogoWhite.svg" class="only-dark"/>
+
+<p class="notices">
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/" target="_blank">Manage My Privacy</a>
+|
+<a href="https://www.nvidia.com/en-us/preferences/start/" target="_blank">Do Not Sell or Share My Data</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a>
+|
+<a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a>
+|
+<a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a>
+</p>
+
+<p>
+  Copyright &#169; 2024, NVIDIA Corporation.
+</p>
+
+    <p>
+      <span class="lastupdated">Last updated on Aug 30, 2024.
+      </span></p>
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+    <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+    
+
+
+
+</body>
+</html>

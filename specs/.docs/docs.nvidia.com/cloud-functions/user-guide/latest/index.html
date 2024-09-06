@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NVIDIA Cloud Functions &mdash; NVIDIA Cloud Functions latest documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pygments_dark.css" type="text/css" />
+      <link rel="stylesheet" href="_static/theme-switcher-general.css" type="text/css" />
+      <link rel="stylesheet" href="_static/omni-style-dark.css" type="text/css" />
+      <link rel="stylesheet" href="_static/api-styles-dark.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/omni-style.css" type="text/css" />
+      <link rel="stylesheet" href="_static/api-styles.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/mermaid-init.js"></script>
+        <script src="_static/external-links.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/theme-setter.js"></script>
+        <script src="_static/design-tabs.js"></script>
+        <script src="_static/version.js"></script>
+        <script src="_static/social-media.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overview" href="cloud-function/overview.html" />
+ 
+
+    <script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" ></script>
+    
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+<a href="#">
+  <img src="_static/nvidia-logo-white.png" class="logo" alt="Logo"/>
+</a>
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">NVIDIA Cloud Functions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/elastic-nim.html">Elastic NIM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-lifecycle.html">Function Lifecycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-creation.html">Function Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-deployment.html">Function Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-management.html">Function Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-monitoring.html">Function Monitoring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-permissions.html">Function Permissions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/assets.html">Asset Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/cluster-management.html">Cluster Setup &amp; Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/account-access.html">NGC Account Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">NVIDIA Cloud Functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+
+
+<li><a href="#" class="icon icon-home"></a> &raquo;</li>
+  
+<li>NVIDIA Cloud Functions</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+<li class="wy-breadcrumbs-aside">
+
+  <span>&nbsp;</span>
+</li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="nvidia-cloud-functions">
+<h1>NVIDIA Cloud Functions<a class="headerlink" href="#nvidia-cloud-functions" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound" id="id1">
+<p class="caption" role="heading"><span class="caption-text">NVIDIA Cloud Functions</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/overview.html#function-types">Function Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/overview.html#getting-started">Getting Started</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/quickstart.html#clone-build-and-push-the-docker-image-to-ngc-private-registry">Clone, Build and Push the Docker Image to NGC Private Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/quickstart.html#create-deploy-the-function-using-the-cloud-functions-ui">Create &amp; Deploy the Function Using the Cloud Functions UI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/quickstart.html#create-deploy-the-function-using-the-cloud-functions-api">Create &amp; Deploy the Function Using the Cloud Functions API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/quickstart.html#create-deploy-the-function-using-the-ngc-cli">Create &amp; Deploy the Function Using the NGC CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/quickstart.html#invoke-the-function">Invoke the Function</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/elastic-nim.html">Elastic NIM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#about-nim">About NIM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/elastic-nim.html#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#ngc-authentication">NGC Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#download-the-nim">Download the NIM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/elastic-nim.html#export-the-ngc-api-key">Export the NGC API Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/elastic-nim.html#ngc-cli-tool">NGC CLI Tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/elastic-nim.html#docker-login-to-ngc">Docker Login to NGC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/elastic-nim.html#list-available-nims">List Available NIMs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#upload-nim-to-private-registry">Upload NIM to Private Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#create-the-function">Create the Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#validating-the-function-deployment">Validating the Function Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/elastic-nim.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/api.html#openapi-specification">OpenAPI Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/api.html#authorization">Authorization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#generate-an-ngc-personal-api-key">Generate an NGC Personal API Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#api-key-scopes-and-domains">API Key Scopes and Domains</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#jwt-based-authorization">JWT Based Authorization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/api.html#using-the-nvcf-invocation-api">Using the NVCF Invocation API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#http-polling">HTTP (Polling)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/api.html#polling-after-initial-invocation">Polling After Initial Invocation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/api.html#large-responses-302-status-code">Large Responses (302 Status Code)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#http-streaming">HTTP Streaming</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/api.html#advantages-of-http-streaming">Advantages of HTTP Streaming</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#grpc">gRPC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/api.html#statuses-and-errors">Statuses and Errors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#inference-container-status-codes-and-responses">Inference Container Status Codes and Responses</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#nvcf-api-status-codes">NVCF API Status Codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/api.html#common-function-invocation-errors">Common Function Invocation Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-lifecycle.html">Function Lifecycle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-lifecycle.html#key-concepts">Key Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-lifecycle.html#function-states">Function States</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-lifecycle.html#workflow">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-lifecycle.html#function-lifecycle-endpoints">Function Lifecycle Endpoints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-lifecycle.html#function-creation-management-deployment">Function Creation, Management &amp; Deployment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-lifecycle.html#function-metadata">Function Metadata</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-lifecycle.html#function-invocation">Function Invocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-lifecycle.html#asset-management">Asset Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-lifecycle.html#visibility-cluster-groups-gpus">Visibility, Cluster Groups &amp; GPUs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-creation.html">Function Creation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-creation.html#working-with-ngc-private-registry">Working with NGC Private Registry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#generate-an-ngc-personal-api-key">Generate an NGC Personal API Key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#download-configure-the-ngc-cli">Download &amp; Configure the NGC CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#authenticate-with-ngc-docker-registry">Authenticate with NGC Docker Registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#optional-push-a-container-to-the-ngc-private-registry">(Optional) Push a Container to the NGC Private Registry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#best-practices-with-ngc-docker-registry-and-cloud-functions">Best Practices with NGC Docker Registry and Cloud Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#container-versioning">Container Versioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#usage-of-ngc-teams">Usage of NGC Teams</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-creation.html#container-based-function-creation">Container-Based Function Creation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#resources">Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#container-endpoints">Container Endpoints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#composing-a-fastapi-container">Composing a FastAPI Container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#create-the-requirements-txt-file">Create the “requirements.txt” File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#implement-the-server">Implement the Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#create-the-dockerfile">Create the Dockerfile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#build-the-container-create-the-function">Build the Container &amp; Create the Function</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#composing-a-pytriton-container">Composing a PyTriton Container</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#id5">Create the “requirements.txt” File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#create-the-run-py-file">Create the “run.py” File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#id6">Create the “Dockerfile”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#build-the-docker-image">Build the Docker Image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#push-the-docker-image">Push the Docker Image</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#create-the-function">Create the Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#additional-examples">Additional Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#triton-based-container-configuration">Triton-based Container Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#creating-functions-with-ngc-models-resources">Creating Functions with NGC Models &amp; Resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#creating-grpc-based-functions">Creating gRPC-based Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#grpc-function-creation-via-ui">gRPC Function Creation via UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#grpc-function-creation-via-cli">gRPC Function Creation via CLI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#grpc-function-creation-via-api">gRPC Function Creation via API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#grpc-function-invocation">gRPC Function Invocation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#available-container-variables">Available Container Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#adding-partial-response-progress">Adding Partial Response (Progress)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#storing-partial-and-complete-outputs">Storing Partial and Complete Outputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#creating-a-progress-file">Creating a Progress File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-creation.html#best-practices">Best Practices</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-creation.html#helm-based-function-creation">Helm-Based Function Creation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#helm-prereq">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#secret-management">Secret Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#create-a-helm-based-function">Create a Helm-based Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-creation.html#helm-chart-overrides">Helm Chart Overrides</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-deployment.html">Function Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-deployment.html#deployment-validation">Deployment Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-deployment.html#deploying-a-function">Deploying a Function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-deployment.html#key-concepts">Key Concepts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-deployment.html#function-queueing">Function Queueing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-deployment.html#autoscaling-and-instance-counts">Autoscaling and Instance Counts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-deployment.html#deploy-via-the-ui">Deploy via the UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-deployment.html#deploy-via-api">Deploy via API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-deployment.html#deploy-via-cli">Deploy via CLI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-deployment.html#delete-a-deployment">Delete a Deployment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-deployment.html#deployment-failures">Deployment Failures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-management.html">Function Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-management.html#function-versioning">Function Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-management.html#function-versioning-best-practices">Function Versioning Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-management.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-management.html#function-update-flow-a-b-testing">Function Update Flow (A/B Testing)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-monitoring.html">Function Monitoring</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-monitoring.html#troubleshooting">Troubleshooting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-monitoring.html#logging-and-metrics">Logging and Metrics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-monitoring.html#emit-and-view-inference-container-logs">Emit and View Inference Container Logs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/function-monitoring.html#how-to-add-logs-to-your-inference-container">How to Add Logs to Your Inference Container</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-monitoring.html#view-function-metrics">View Function Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/function-monitoring.html#instrument-with-opentelemetry">Instrument with OpenTelemetry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-monitoring.html#logging-and-metrics-internal">Logging and Metrics (Internal)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/function-permissions.html">Function Permissions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/function-permissions.html#listing-functions-via-api">Listing Functions via API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/assets.html">Asset Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/assets.html#creating-an-asset-id-and-pre-signed-upload-url">Creating an Asset ID and Pre-signed Upload URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/assets.html#uploading-assets-to-cloud-storage">Uploading Assets to Cloud Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/assets.html#listing-assets">Listing Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/assets.html#deleting-assets">Deleting Assets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/assets.html#specifying-assets-when-invoking-a-function">Specifying Assets when invoking a Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/assets.html#using-assets-with-custom-containers">Using Assets with Custom Containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/assets.html#retrieving-asset-directory-and-asset-id-in-triton-python-backend">Retrieving Asset Directory and Asset ID in Triton Python Backend</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/cluster-management.html">Cluster Setup &amp; Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/cluster-management.html#prerequisites">Prerequisites</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#supported-kubernetes-versions">Supported Kubernetes Versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#considerations">Considerations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/cluster-management.html#register-the-cluster">Register the Cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#advanced-settings">Advanced Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/cluster-management.html#caching-support">Caching Support</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#install-the-cluster-agent">Install the Cluster Agent</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/cluster-management.html#view-validate-cluster-setup">View &amp; Validate Cluster Setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#verify-cluster-agent-installation-via-ui">Verify Cluster Agent Installation via UI</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#verify-cluster-agent-installation-via-terminal">Verify Cluster Agent Installation via Terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/cluster-management.html#cluster-agent-monitoring-and-reliability">Cluster Agent Monitoring and Reliability</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#monitoring-data">Monitoring Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/cluster-management.html#metrics">Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/cluster-management.html#logs">Logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="cloud-function/cluster-management.html#tracing">Tracing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#cluster-key-rotation">Cluster Key Rotation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/cluster-management.html#advanced-nvca-operator-configuration-options">Advanced: NVCA Operator Configuration Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#node-affinity">Node Affinity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#nvca-operator-parameters">NVCA Operator Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#ngc-configuration">NGC Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#node-selector-configuration">Node Selector Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cloud-function/cluster-management.html#opentelemetry-configuration">OpenTelemetry Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/cluster-management.html#advanced-manual-instance-configuration">Advanced: Manual Instance Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/account-access.html">NGC Account Access</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cloud-function/account-access.html#login-as-the-organization-owner">Login as the Organization Owner</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cloud-function/faq.html">FAQ</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+<img src="_static/NVIDIA-LogoBlack.svg" class="only-light"/>
+<img src="_static/NVIDIA-LogoWhite.svg" class="only-dark"/>
+
+<p class="notices">
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/" target="_blank">Manage My Privacy</a>
+|
+<a href="https://www.nvidia.com/en-us/preferences/start/" target="_blank">Do Not Sell or Share My Data</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a>
+|
+<a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a>
+|
+<a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a>
+</p>
+
+<p>
+  Copyright &#169; 2024, NVIDIA Corporation.
+</p>
+
+    <p>
+      <span class="lastupdated">Last updated on Aug 30, 2024.
+      </span></p>
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+    <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+    
+
+
+
+</body>
+</html>

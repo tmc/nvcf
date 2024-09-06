@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Function Permissions &mdash; NVIDIA Cloud Functions latest documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/pygments_dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme-switcher-general.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/omni-style-dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/api-styles-dark.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/omni-style.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/api-styles.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/mermaid-init.js"></script>
+        <script src="../_static/external-links.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/theme-setter.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+        <script src="../_static/version.js"></script>
+        <script src="../_static/social-media.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Asset Management" href="assets.html" />
+    <link rel="prev" title="Function Monitoring" href="function-monitoring.html" />
+ 
+
+    <script src="https://assets.adobedtm.com/5d4962a43b79/c1061d2c5e7b/launch-191c2462b890.min.js" ></script>
+    
+
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+<a href="../index.html">
+  <img src="../_static/nvidia-logo-white.png" class="logo" alt="Logo"/>
+</a>
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">NVIDIA Cloud Functions</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="elastic-nim.html">Elastic NIM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-lifecycle.html">Function Lifecycle</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-creation.html">Function Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-deployment.html">Function Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-management.html">Function Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="function-monitoring.html">Function Monitoring</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Function Permissions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#listing-functions-via-api">Listing Functions via API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assets.html">Asset Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster-management.html">Cluster Setup &amp; Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="account-access.html">NGC Account Access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NVIDIA Cloud Functions</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+
+
+<li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+  
+<li>Function Permissions</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+<li class="wy-breadcrumbs-aside">
+
+  <span>&nbsp;</span>
+</li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="function-permissions">
+<span id="id1"></span><h1>Function Permissions<a class="headerlink" href="#function-permissions" title="Permalink to this headline"></a></h1>
+<p>This page describes function invocation permissions and public and shared function access within your Cloud Functions account.</p>
+<p>Function permissions within Cloud Functions fall into three categories:</p>
+<ol class="arabic simple">
+<li><p><strong>Account-owned functions</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>These are functions that are scoped to just your Cloud Functions account, within your NGC organization, listed as “My Functions”. Any user within your NGC organization can invoke account-owned functions by generating a Personal API Key. See <a class="reference internal" href="api.html#generate-personal-key"><span class="std std-ref">Generate an NGC Personal API Key</span></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Metrics and logs in the Cloud Functions UI are currently only available for account-owned functions.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Shared functions</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>These are functions that are shared to your Cloud Functions account, from a different Cloud Functions account, listed as “Shared Functions”. Functions shared to your account are invoke-able by any user within your NGC organization, via generating a Personal API Key.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Public functions</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>These are <a class="reference external" href="https://www.nvidia.com/en-us/ai/">NVIDIA NIM</a> functions that are maintained by NVIDIA and shared to all NGC organizations for public access, listed as “Created by NVIDIA”. The functions listed here are also available to invoke via <a class="reference external" href="https://build.nvidia.com/explore/discover">NVIDIA’s AI API Catalog</a>. Refer to the samples within the catalog for instructions on how to invoke the function.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Reach out to your NVIDIA account manager to request shared function capabilities for your account’s functions and options for self-hosting NIMs within your account.</p>
+</div>
+<p>All function categories are visible in the UI under the Functions List page tabs and are also visible in the API when listing functions.</p>
+<img alt="Function List Page" class="align-center" src="../_images/function-list-tabs.png" />
+<section id="listing-functions-via-api">
+<h2>Listing Functions via API<a class="headerlink" href="#listing-functions-via-api" title="Permalink to this headline"></a></h2>
+<p>All functions available to your Cloud Functions account are listable via API with the following curl.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> curl --location <span class="s1">&#39;https://api.ngc.nvidia.com/v2/nvcf/functions?visibility=authorized&amp;visibility=private&amp;visibility=public&#39;</span> <span class="se">\</span>
+<span class="linenos">2</span> --header <span class="s1">&#39;Accept: application/json&#39;</span> <span class="se">\</span>
+<span class="linenos">3</span> --header <span class="s1">&#39;Authorization: Bearer $API_KEY&#39;</span>
+</pre></div>
+</div>
+<p>Available parameters for filtering include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">visibility=private</span></code> - Account-owned functions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visibility=authorized</span></code> - Functions shared to your account</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">visibility=public</span></code> - Functions created by NVIDIA available to all accounts</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+<img src="../_static/NVIDIA-LogoBlack.svg" class="only-light"/>
+<img src="../_static/NVIDIA-LogoWhite.svg" class="only-dark"/>
+
+<p class="notices">
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/" target="_blank">Manage My Privacy</a>
+|
+<a href="https://www.nvidia.com/en-us/preferences/start/" target="_blank">Do Not Sell or Share My Data</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a>
+|
+<a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a>
+|
+<a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a>
+|
+<a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a>
+</p>
+
+<p>
+  Copyright &#169; 2024, NVIDIA Corporation.
+</p>
+
+    <p>
+      <span class="lastupdated">Last updated on Aug 30, 2024.
+      </span></p>
+
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ 
+
+    <script type="text/javascript">if (typeof _satellite !== "undefined") {_satellite.pageBottom();}</script>
+    
+
+
+
+</body>
+</html>
