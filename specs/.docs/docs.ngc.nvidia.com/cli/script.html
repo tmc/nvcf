@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+
+<html lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scripting Tips and Best Practices &#8212; ngc-cli  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/api-styles.css" />
+    <link rel="stylesheet" type="text/css" href="_static/omni-style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/ngc.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/version.js"></script>
+    <script src="_static/ngc.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="base-command (bc)" href="cmd_base-command.html" />
+    <link rel="prev" title="Interactive Jobs with NGC Shell" href="shell.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="python">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/nvidia-logo-white.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search docs" aria-label="Search docs" autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using the NGC CLI
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd.html">
+   Getting Started with the NGC CLI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="shell.html">
+   Interactive Jobs with NGC Shell
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Scripting Tips and Best Practices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Commands Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_base-command.html">
+   base-command (bc)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_config.html">
+   config
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_diag.html">
+   diag
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_fleet-command.html">
+   fleet-command
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_org.html">
+   org
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_registry.html">
+   registry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_cloud-function.html">
+   cloud-function (cf)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_team.html">
+   team
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_user.html">
+   user
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right"><label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tips-about-global-arguments">
+   Tips about Global Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment-variables">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#precedence-considerations">
+   Precedence Considerations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#blocking-the-cli-to-wait-for-a-job-status-when-starting-a-new-job">
+   Blocking the CLI to Wait for a Job Status When Starting a New Job
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-script">
+   Example Script
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Scripting Tips and Best Practices</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tips-about-global-arguments">
+   Tips about Global Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment-variables">
+   Environment Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#precedence-considerations">
+   Precedence Considerations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#blocking-the-cli-to-wait-for-a-job-status-when-starting-a-new-job">
+   Blocking the CLI to Wait for a Job Status When Starting a New Job
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-script">
+   Example Script
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="section" id="scripting-tips-and-best-practices">
+<h1>Scripting Tips and Best Practices<a class="headerlink" href="#scripting-tips-and-best-practices" title="Permalink to this headline">¶</a></h1>
+<p>The NGC CLI provides advanced scripting capabilities.
+You can temporarily override configuration settings with the use of global arguments.
+You can even save those settings permanently by combining global arguments with the <code class="docutils literal notranslate"><span class="pre">ngc</span> <span class="pre">config</span> <span class="pre">set</span></code> command.</p>
+<div class="section" id="tips-about-global-arguments">
+<h2>Tips about Global Arguments<a class="headerlink" href="#tips-about-global-arguments" title="Permalink to this headline">¶</a></h2>
+<p>When you specify global arguments for a command, you temporarily override your configuration settings for the duration of the command.
+If you provide all the required settings through global arguments, then the CLI no longer requires configuration files at all.</p>
+<p>The following list identifies important considerations for global arguments:</p>
+<ul>
+<li><p>Global arguments are not positional and can be specified in any order.
+The following two commands perform the same action and produce identical results:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ngc<span class="w"> </span>user<span class="w"> </span>who<span class="w"> </span>--format_type<span class="w"> </span>json
+
+ngc<span class="w"> </span>user<span class="w"> </span>--format_type<span class="w"> </span>json<span class="w"> </span>who
+</pre></div>
+</div>
+</li>
+<li><p>Global arguments always validate the specified values, even if they the argument does not affect the command.
+For example, because the specified ACE does not exist, the following command produces an error and does not execute the <code class="docutils literal notranslate"><span class="pre">clear</span></code> command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ngc<span class="w"> </span>config<span class="w"> </span>clear<span class="w"> </span>--ace<span class="w"> </span>not_existing_ace
+</pre></div>
+</div>
+</li>
+</ul>
+<p>As an example, the output of the <code class="docutils literal notranslate"><span class="pre">ngc</span> <span class="pre">user</span> <span class="pre">who</span></code> command shows several values from configuration files:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>+---------+---------------+---------------------+---------------------+----------------------+-------------------------+
+<span class="p">|</span><span class="w"> </span>User<span class="w"> </span>Id<span class="w"> </span><span class="p">|</span><span class="w"> </span>Name<span class="w">          </span><span class="p">|</span><span class="w"> </span>Email<span class="w">               </span><span class="p">|</span><span class="w"> </span>Org<span class="w"> </span><span class="o">[</span>Roles<span class="o">]</span><span class="w">         </span><span class="p">|</span><span class="w"> </span>Teams<span class="w"> </span><span class="o">[</span>Roles<span class="o">]</span><span class="w">        </span><span class="p">|</span><span class="w"> </span>Created<span class="w"> </span>Date<span class="w">            </span><span class="p">|</span>
++---------+---------------+---------------------+---------------------+----------------------+-------------------------+
+<span class="p">|</span><span class="w"> </span><span class="m">123</span><span class="w">     </span><span class="p">|</span><span class="w"> </span>Script<span class="w"> </span>Master<span class="w"> </span><span class="p">|</span><span class="w"> </span>scripter@nvidia.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>nvidia<span class="w">              </span><span class="p">|</span><span class="w"> </span>team_1<span class="w">               </span><span class="p">|</span><span class="w"> </span><span class="m">2018</span>-05-08<span class="w"> </span><span class="m">22</span>:57:31<span class="w"> </span>UTC<span class="w"> </span><span class="p">|</span>
+<span class="p">|</span><span class="w">         </span><span class="p">|</span><span class="w">               </span><span class="p">|</span><span class="w">                     </span><span class="p">|</span><span class="w"> </span><span class="o">[</span>BASE_COMMAND_USER<span class="o">]</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="o">[</span>BASE_COMMAND_ADMIN<span class="o">]</span><span class="w"> </span><span class="p">|</span><span class="w">                         </span><span class="p">|</span>
+<span class="p">|</span><span class="w">         </span><span class="p">|</span><span class="w">               </span><span class="p">|</span><span class="w">                     </span><span class="p">|</span><span class="w">                     </span><span class="p">|</span><span class="w"> </span>team_2<span class="w">               </span><span class="p">|</span><span class="w">                         </span><span class="p">|</span>
+<span class="p">|</span><span class="w">         </span><span class="p">|</span><span class="w">               </span><span class="p">|</span><span class="w">                     </span><span class="p">|</span><span class="w">                     </span><span class="p">|</span><span class="w"> </span><span class="o">[</span>BASE_COMMAND_USER<span class="o">]</span><span class="w">  </span><span class="p">|</span><span class="w">                         </span><span class="p">|</span>
++---------+---------------+---------------------+---------------------+----------------------+-------------------------+
+</pre></div>
+</div>
+<p>By default, the organization and team from the configuration files is used.
+You can specify global arguments to override those values.</p>
+<p>Refer to the following list of global arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--ace</span></code> Updates the <cite>ACE name</cite> used in commands whose help message says that they use the set ACE.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--debug</span></code> Enables debug mode for the current command.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--format_type</span></code> Updates the output format. Specify <cite>json</cite>, <cite>ascii</cite>, or <cite>csv</cite>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--org</span></code> Updates the <cite>org name</cite> used in commands whose help message says that they use the set org.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--team</span></code> Updates the <cite>team name</cite> used in commands whose help message says that they use the set team.</p></li>
+</ul>
+<p>If you specify an invalid value for a global argument, the CLI exits with a return code of <code class="docutils literal notranslate"><span class="pre">2</span></code> and displays an error message.</p>
+</div>
+<div class="section" id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>Environment variables provide another way to specify configuration options and credentials.
+You can use them with scripting to temporarily set them in the shell where you need to run the CLI.</p>
+<p>Following environment variables are supported by NGC CLI:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">NGC_CLI_ACE</span></code></dt><dd><p>Specifies the ACE for running batch jobs.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NGC_CLI_API_KEY</span></code></dt><dd><p>Specifies the NGC access key (API Key). This is essentially the password to access NGC.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NGC_CLI_FORMAT_TYPE</span></code></dt><dd><p>Specifies the output format: JSON, CSV, or ASCII.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NGC_CLI_HOME</span></code></dt><dd><p>Specifies the home directory for NGC. The default value is <code class="docutils literal notranslate"><span class="pre">~/.ngc</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NGC_CLI_ORG</span></code></dt><dd><p>Specifies the organization name.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">NGC_CLI_TEAM</span></code></dt><dd><p>Specifies the team name.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Configuration files are stored in an automatically created <code class="docutils literal notranslate"><span class="pre">.ngc</span></code> subdirectory of the path specified in <code class="docutils literal notranslate"><span class="pre">NGC_CLI_HOME</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">NGC_CLI_HOME</span></code> is not specified, configuration files are stored at <code class="docutils literal notranslate"><span class="pre">~/.ngc</span></code> on Linux and MacOS.
+On Windows, the location of the <code class="docutils literal notranslate"><span class="pre">.ngc</span></code> directory depends on other environment variables.
+The directory is created in the location that is specified by the first variable that is set: <code class="docutils literal notranslate"><span class="pre">%HOME%</span></code>, <code class="docutils literal notranslate"><span class="pre">%USERPROFILE%</span></code>, or <code class="docutils literal notranslate"><span class="pre">%HOMEDRIVE%%HOMEPATH%</span></code>.</p>
+</div>
+</div>
+<div class="section" id="precedence-considerations">
+<h2>Precedence Considerations<a class="headerlink" href="#precedence-considerations" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>If you specify a value using an environment variable, the value overrides the value loaded from your configuration file.</p></li>
+<li><p>If you specify a value using a global argument on the CLI command line, the value overrides any value either from an environment variable or your configuration file.</p></li>
+</ul>
+</div>
+<div class="section" id="blocking-the-cli-to-wait-for-a-job-status-when-starting-a-new-job">
+<h2>Blocking the CLI to Wait for a Job Status When Starting a New Job<a class="headerlink" href="#blocking-the-cli-to-wait-for-a-job-status-when-starting-a-new-job" title="Permalink to this headline">¶</a></h2>
+<p>Refer to the following arguments to control how the CLI waits before returning control to your shell when you start a job.
+By default, the CLI does not wait and immediately returns your shell prompt.</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">--waitrun</span></code></dt><dd><p>The CLI blocks until the job reaches a running state or you exit the job by entering Ctrl+C.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--waitend</span></code></dt><dd><p>The CLI blocks until the job reaches a terminal state or you exit the job by entering Ctrl+C.</p>
+</dd>
+</dl>
+<p>If the job reaches a state where it cannot reach the desired state, the CLI will exit with exit code 1 and return an error message.</p>
+</div>
+<div class="section" id="example-script">
+<h2>Example Script<a class="headerlink" href="#example-script" title="Permalink to this headline">¶</a></h2>
+<p>For the following example, imagine that our company has a huge dataset that we keep expanding over time and that everyone is tired of running the NGC job manually each day.
+We could set up a cronjob to run the training job on the dataset every day at 7:00 A.M.
+Keep in mind, you can run this cronjob on a very low-powered machine without any NGC configuration files.</p>
+<ol class="arabic">
+<li><p>Install NGC. Refer to <a class="reference internal" href="cmd.html"><span class="doc">Getting Started with the NGC CLI</span></a>.</p></li>
+<li><p>Create a Bash script like the following code that can run the job:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="nv">DATE</span><span class="o">=</span><span class="sb">`</span>date<span class="w"> </span>+%m-%d-%yT%H-%M<span class="sb">`</span>
+<span class="c1"># Define my NGC user constants</span>
+<span class="nv">NGC_CLI_API_KEY</span><span class="o">=</span><span class="s2">&quot;*******************************************&quot;</span>
+<span class="nv">NGC_CLI_ORG</span><span class="o">=</span><span class="s2">&quot;my_org&quot;</span>
+<span class="nv">NGC_CLI_ACE</span><span class="o">=</span><span class="s2">&quot;our_fastest_ace&quot;</span>
+
+<span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;--format_type json&quot;</span>
+<span class="nv">OPTS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Define my NGC job constants</span>
+<span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;--name our_job-</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">DATASET</span><span class="o">=</span><span class="s2">&quot;--datasetid 1234:/mnt/huge_dataset&quot;</span>
+<span class="nv">IMAGE</span><span class="o">=</span><span class="s2">&quot;--image nvidia/tensorflow-test&quot;</span>
+<span class="nv">INSTANCE</span><span class="o">=</span><span class="s2">&quot;--instance biggest_one&quot;</span>
+<span class="nv">PREEMPT</span><span class="o">=</span><span class="s2">&quot;--preempt RUNONCE&quot;</span>
+<span class="nv">RESULT</span><span class="o">=</span><span class="s2">&quot;--result /result&quot;</span>
+<span class="nv">COMMAND</span><span class="o">=</span><span class="s2">&quot;--commandline bash /mnt/dataset/run_my_job.sh&quot;</span>
+<span class="nv">JOB_OPTS</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">DATASET</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">IMAGE</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">INSTANCE</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">PREEMPT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">RESULT</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">COMMAND</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Pre-declare our commands</span>
+<span class="nb">declare</span><span class="w"> </span>-a<span class="w"> </span><span class="nv">commands</span><span class="o">=(</span><span class="s2">&quot;ngc user who&quot;</span><span class="w"> </span><span class="s2">&quot;ngc batch run </span><span class="si">${</span><span class="nv">JOB_OPTS</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span>
+
+<span class="k">for</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">commands</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="si">${</span><span class="nv">command</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">OPTS</span><span class="si">}</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</li>
+<li><p>Cronjob enables you to run specific jobs at certain times during the day.
+To run the previously created script, edit your crontab file by entering <code class="docutils literal notranslate"><span class="pre">crontab</span> <span class="pre">-e</span></code>.
+Add the following line to run the job at 7:00 A.M. every day:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="m">0</span><span class="w"> </span><span class="m">7</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/path/to/our/script/file
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p class="footer">
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/" target="_blank">Manage My Privacy</a> |
+<a href="https://www.nvidia.com/en-us/preferences/start/" target="_blank">Do Not Sell or Share My Data</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a> |
+<a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a> |
+<a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a>
+</p>
+<p class="copyright">
+  Copyright &copy; 2018-2024, NVIDIA Corporation.
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

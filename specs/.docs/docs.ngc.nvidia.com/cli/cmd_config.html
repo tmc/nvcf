@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+
+<html lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>config &#8212; ngc-cli  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/api-styles.css" />
+    <link rel="stylesheet" type="text/css" href="_static/omni-style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/ngc.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/version.js"></script>
+    <script src="_static/ngc.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="diag" href="cmd_diag.html" />
+    <link rel="prev" title="base-command (bc)" href="cmd_base-command.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="python">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/nvidia-logo-white.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search docs" aria-label="Search docs" autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using the NGC CLI
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd.html">
+   Getting Started with the NGC CLI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="shell.html">
+   Interactive Jobs with NGC Shell
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="script.html">
+   Scripting Tips and Best Practices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Commands Reference
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_base-command.html">
+   base-command (bc)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   config
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_diag.html">
+   diag
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_fleet-command.html">
+   fleet-command
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_org.html">
+   org
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_registry.html">
+   registry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_cloud-function.html">
+   cloud-function (cf)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_team.html">
+   team
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_user.html">
+   user
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right"><label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#named-arguments">
+   Named Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#config">
+   config
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Sub-commands">
+   Sub-commands
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clear">
+     clear
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat1">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clear-cache">
+     clear-cache
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat2">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set">
+     set
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat3">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#current">
+     current
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat4">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   <strong>
+    Examples
+   </strong>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-set-config">
+     How to set config?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-clear-config">
+     How to clear config?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>config</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#named-arguments">
+   Named Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#config">
+   config
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Sub-commands">
+   Sub-commands
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clear">
+     clear
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat1">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clear-cache">
+     clear-cache
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat2">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set">
+     set
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat3">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#current">
+     current
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat4">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   <strong>
+    Examples
+   </strong>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-set-config">
+     How to set config?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-clear-config">
+     How to clear config?
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="section" id="config">
+<h1>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h1>
+<p><p>Configuration Commands</p>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">ngc</span> <span class="n">config</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+                  <span class="p">{</span><span class="n">clear</span><span class="p">,</span><span class="n">clear</span><span class="o">-</span><span class="n">cache</span><span class="p">,</span><span class="n">current</span><span class="p">,</span><span class="nb">set</span><span class="p">}</span> <span class="o">...</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#named-arguments" title="Permalink to this headline">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="config">
+<h2>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>{clear,clear-cache,current,set}</kbd></dt>
+<dd><p>Possible choices: clear, clear-cache, current, set</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="Sub-commands">
+<h2>Sub-commands<a class="headerlink" href="#Sub-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="clear">
+<h3>clear<a class="headerlink" href="#clear" title="Permalink to this headline">¶</a></h3>
+<p>Clear the configuration stored in the user settings file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">config</span> <span class="n">clear</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat1">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat1" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="clear-cache">
+<h3>clear-cache<a class="headerlink" href="#clear-cache" title="Permalink to this headline">¶</a></h3>
+<p>Clear cached values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">config</span> <span class="n">clear</span><span class="o">-</span><span class="n">cache</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat2">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat2" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="set">
+<h3>set<a class="headerlink" href="#set" title="Permalink to this headline">¶</a></h3>
+<p>Set the configuration in the user settings file.  Use optional arguments to choose what will be set.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">config</span> <span class="nb">set</span> <span class="p">[</span><span class="o">--</span><span class="n">auth</span><span class="o">-</span><span class="n">option</span> <span class="p">{</span><span class="n">api</span><span class="o">-</span><span class="n">key</span><span class="p">,</span><span class="n">email</span><span class="p">}]</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span>
+               <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat3">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat3" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+<dt><kbd>--auth-option</kbd></dt>
+<dd><p>Possible choices: api-key, email</p>
+<p>Specify authentication option ('api key' or 'email') for setting config.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="current">
+<h3>current<a class="headerlink" href="#current" title="Permalink to this headline">¶</a></h3>
+<p>List the current configuration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">config</span> <span class="n">current</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">show</span><span class="o">-</span><span class="n">auth</span><span class="o">-</span><span class="n">token</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">yes</span><span class="p">]</span>
+                   <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat4">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat4" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+<dt><kbd>--show-auth-token</kbd></dt>
+<dd><p>Show the Docker login password (Starfleet ID Token) if this flag is set.</p>
+</dd>
+<dt><kbd>--yes</kbd></dt>
+<dd><p>Automatically confirm the retrieval of the auth token without prompting.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><strong>Examples</strong><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-set-config">
+<h3>How to set config?<a class="headerlink" href="#how-to-set-config" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ngc config set --format_type json
+
+Successfully saved NGC configuration C:\Users\&lt;username&gt;\.ngc\config
+
+$ ngc config set
+
+Enter API key[**************************************************************************************Q1Nw]:
+Enter CLI output format type [ascii]. Choices: [&#39;ascii&#39;, &#39;csv&#39;, &#39;json&#39;]
+Enter default org [b0xlotzw8zo9]. Choices: [b0xlotzw8zo9, nvidia]:
+Successfully saved NGC configuration C:\Users\foo\.ngc\config
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-clear-config">
+<h3>How to clear config?<a class="headerlink" href="#how-to-clear-config" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ngc config clear
+
+Successfully cleared NGC configuration C:\Users\&lt;username&gt;\.ngc\config
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p class="footer">
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/" target="_blank">Manage My Privacy</a> |
+<a href="https://www.nvidia.com/en-us/preferences/start/" target="_blank">Do Not Sell or Share My Data</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a> |
+<a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a> |
+<a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a>
+</p>
+<p class="copyright">
+  Copyright &copy; 2018-2024, NVIDIA Corporation.
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

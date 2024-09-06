@@ -1,0 +1,139 @@
+
+/* The "Sign in to the Console" button. */
+.ui.button.ngc {
+  color: var(--nv-green);
+  border: 1px solid;
+  border-color: var(--nv-green);
+  padding: 5px;
+  margin: 0;
+}
+.ui.button.ngc:hover {
+  background: var(--gray-2);
+}
+
+.bd-sidebar div {
+  background: black;
+}
+
+.article div > h1,
+.article div > h2,
+.article div > h3,
+.article div > h4,
+.article div > h5,
+.article div > h6,
+
+/* Limit depth on the page TOC. */
+li.toc-h3 > ul > * {
+  display: none;
+}
+
+/* From theme.css */
+code.literal, kbd {
+  color: #E74C3C;
+  background: #fff;
+  border: solid 1px #e1e4e5;
+  padding: 0 5px;
+}
+
+/* Style the search box like Fleet. */
+/*
+form.bd-search {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+*/
+input.form-control {
+  border: 1px solid black;
+  padding: 0 10px;
+}
+
+i.icon {  /* The magnifying glass for search. */
+  visibility: hidden; /* Hmm, should prolly be "hack". */
+}
+
+/* Tweaks and overrides for the navigation. */
+nav.bd-links p.caption {
+  color: var(--nv-green);
+  background-color: #333333;
+  text-indent: 20px;
+  margin: 12px 0 0 0;
+  height: 32px;
+  line-height: 32px;
+  font-size: 100%;
+}
+ul.bd-sidenav > li {
+  text-indent: 30px;
+  font-size: 100%;
+}
+#site-navigation nav ul.nav li > a {
+  color: #cccccc;
+  font-size: 110%;
+}
+#site-navigation nav ul.nav li.current {
+  color: #404040;
+  border-top: solid 1px #c9c9c9;
+  border-bottom: solid 1px #c9c9c9;
+  background: #fcfcfc;
+}
+#site-navigation nav ul.nav li.active > a:hover {
+  color: #404040;
+  background: #fcfcfc;
+}
+#site-navigation nav ul.nav li > a:hover {
+  color: #cccccc;
+}
+#site-navigation nav ul.nav li:hover {
+  background: grey;
+}
+#site-navigation nav ul.current li.current > a {
+  color: #404040;
+}
+#site-navigation .bd-sidebar__top, #site-navigation .bd-sidebar__bottom {
+  padding: 0;
+}
+#site-navigation .bd-sidebar__content::-webkit-scrollbar {
+  background: #fff;
+}
+
+
+/* Stolen from Riva */
+:root {
+--pst-font-size-base: none;
+--pst-color-primary: 0, 133, 197;
+--pst-color-admonition-note: var(--pst-color-primary);
+--pst-color-admonition-default: var(--pst-color-primary);
+--pst-color-info: 255, 193, 7;
+--pst-color-admonition-tip: var(--pst-color-info);
+--pst-color-admonition-hint: var(--pst-color-info);
+--pst-color-admonition-important: var(--pst-color-info);
+--pst-color-warning: 245, 162, 82;
+--pst-color-danger: 230, 101, 129;
+--pst-color-admonition-warning: var(--pst-color-danger);
+--pst-color-link: 118, 185, 0;
+--pst-color-inline-code: 92, 22, 130;
+--font-family-sans-serif: NVIDIA Sans, Helvetica, Arial, Sans-serif;
+--pst-font-family-base-system: NVIDIA Sans, Helvetica, Arial, Sans-serif;
+font-family: NVIDIA Sans, Helvetica, Arial, Sans-serif;
+}
+
+a:link { text-decoration: none; }
+
+.scrollable {
+  height: 125px;
+  overflow-y: auto;
+  font-size: 1.3rem;
+}
+.link-primary {
+  color: var(--nv-green);
+}
+.link-primary:hover {
+  color: var(--nv-green-darken);
+}
+
+p.footer a, p.footer a:visited {
+  color: var(--small-font-color);
+}
+
+p.footer a:hover {
+  color: var(--text);
+}

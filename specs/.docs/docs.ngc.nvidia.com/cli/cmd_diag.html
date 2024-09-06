@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+
+<html lang="python">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>diag &#8212; ngc-cli  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/api-styles.css" />
+    <link rel="stylesheet" type="text/css" href="_static/omni-style.css" />
+    <link rel="stylesheet" type="text/css" href="_static/ngc.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/version.js"></script>
+    <script src="_static/ngc.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fleet-command" href="cmd_fleet-command.html" />
+    <link rel="prev" title="config" href="cmd_config.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="python">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/nvidia-logo-white.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search docs" aria-label="Search docs" autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Using the NGC CLI
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd.html">
+   Getting Started with the NGC CLI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="shell.html">
+   Interactive Jobs with NGC Shell
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="script.html">
+   Scripting Tips and Best Practices
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Commands Reference
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_base-command.html">
+   base-command (bc)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_config.html">
+   config
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   diag
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_fleet-command.html">
+   fleet-command
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_org.html">
+   org
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_registry.html">
+   registry
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_cloud-function.html">
+   cloud-function (cf)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_team.html">
+   team
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cmd_user.html">
+   user
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right"><label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#named-arguments">
+   Named Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diag">
+   diag
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Sub-commands">
+   Sub-commands
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#all">
+     all
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat1">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install">
+     install
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat2">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#client">
+     client
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat3">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#user">
+     user
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat4">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#server">
+     server
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat5">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   <strong>
+    Examples
+   </strong>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installation-environment">
+     Installation Environment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#client-environment">
+     Client Environment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#server-information">
+     Server Information
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>diag</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#named-arguments">
+   Named Arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diag">
+   diag
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Sub-commands">
+   Sub-commands
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#all">
+     all
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat1">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install">
+     install
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat2">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#client">
+     client
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat3">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#user">
+     user
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat4">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#server">
+     server
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#named-arguments_repeat5">
+       Named Arguments
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples">
+   <strong>
+    Examples
+   </strong>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#installation-environment">
+     Installation Environment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#client-environment">
+     Client Environment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#server-information">
+     Server Information
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="section" id="diag">
+<h1>diag<a class="headerlink" href="#diag" title="Permalink to this headline">¶</a></h1>
+<p><p>The diagnostic commands print configuration and environment information and provide suggestions on identifiable misconfigurations or common issues. No private credentials are included in the gathered diagnostic data.</p>
+</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">ngc</span> <span class="n">diag</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+                <span class="p">{</span><span class="nb">all</span><span class="p">,</span><span class="n">client</span><span class="p">,</span><span class="n">install</span><span class="p">,</span><span class="n">server</span><span class="p">}</span> <span class="o">...</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments">
+<h2>Named Arguments<a class="headerlink" href="#named-arguments" title="Permalink to this headline">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="diag">
+<h2>diag<a class="headerlink" href="#diag" title="Permalink to this headline">¶</a></h2>
+<dl class="option-list">
+<dt><kbd>{all,client,install,server}</kbd></dt>
+<dd><p>Possible choices: all, client, install, server, user</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="Sub-commands">
+<h2>Sub-commands<a class="headerlink" href="#Sub-commands" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="all">
+<h3>all<a class="headerlink" href="#all" title="Permalink to this headline">¶</a></h3>
+<p>Produce the maximum amount of diagnostic output (client, install, server, user).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">diag</span> <span class="nb">all</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat1">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat1" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="install">
+<h3>install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
+<p>Produce diagnostic output only for the local installation environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">diag</span> <span class="n">install</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat2">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat2" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="client">
+<h3>client<a class="headerlink" href="#client" title="Permalink to this headline">¶</a></h3>
+<p>Produce diagnostic output only for the client machine.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">diag</span> <span class="n">client</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat3">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat3" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="user">
+<h3>user<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h3>
+<p>Produce diagnostic output only for the user configuration.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">diag</span> <span class="n">user</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat4">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat4" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="server">
+<h3>server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h3>
+<p>Produce diagnostic output only for remote server systems.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ngc</span> <span class="n">diag</span> <span class="n">server</span> <span class="p">[</span><span class="o">--</span><span class="n">debug</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">format_type</span> <span class="o">&lt;</span><span class="n">fmt</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="named-arguments_repeat5">
+<h4>Named Arguments<a class="headerlink" href="#named-arguments_repeat5" title="Permalink to this headline">¶</a></h4>
+<dl class="option-list">
+<dt><kbd>--debug</kbd></dt>
+<dd><p>Enable debug mode.</p>
+</dd>
+<dt><kbd>--format_type</kbd></dt>
+<dd><p>Possible choices: ascii, csv, json</p>
+<p>Specify the output format type. Supported formats are: ['ascii', 'csv', 'json'].  Only commands that produce tabular data support csv format.  Default: ascii</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h2><strong>Examples</strong><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation-environment">
+<h3>Installation Environment<a class="headerlink" href="#installation-environment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ngc diag install
+
+Checking general information...
+Timestamp: 2019-03-22 14:14:46 UTC
+User name: NGC User
+
+Checking CLI installation...
+CLI version: NGC CLI 2.0.0
+Using a binary version of CLI: YES
+</pre></div>
+</div>
+</div>
+<div class="section" id="client-environment">
+<h3>Client Environment<a class="headerlink" href="#client-environment" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ngc diag client
+
+Checking general information...
+Timestamp: 2019-03-22 14:21:55 UTC
+User name: NGC User
+
+Checking Operating System...
+Type: Linux
+Version: 4.20.14-200.fc29.x86_64
+
+Checking disk usage for /home/ngc_user...
+Total: 850.32 GB
+Free: 799.79 GB
+Used: 0.9%
+
+Checking current directory (/home/ngc_user/) size...
+Size: 712.46 MB
+
+Checking memory usage...
+Total: 31.09 GB
+Free: 19.7 GB
+Used: 14.2%
+
+Checking file permissions...
+set umask: 077
+
+Checking set NGC CLI environment variables...
+None
+</pre></div>
+</div>
+</div>
+<div class="section" id="server-information">
+<h3>Server Information<a class="headerlink" href="#server-information" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ngc diag server
+
+
+Checking general information...
+Timestamp: 2019-03-22 14:23:28 UTC
+User name: NGC User
+
+Checking API gateway connectivity...
+API Connectivity: SUCCESS
+
+Checking authentication...
+Authentication: SUCCESS
+
+Checking API connectivity (container registry)...
+Container Registry Connectivity: SUCCESS
+
+Checking API connectivity (container registry meta)...
+Container Registry Meta Connectivity: SUCCESS
+
+Checking API connectivity (model registry)...
+Model Registry Connectivity: SUCCESS
+
+Checking data storage connectivity...
+Data storage connectivity: An ace (--ace) argument must be specified with this command to check data storage connectivity.
+
+Checking external IP...
+Global IP Address: 255.255.255.255
+</pre></div>
+</div>
+<p>Specify an ACE with the <cite>--ace</cite> option to also see information about data storage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ngc diag server --ace my-ace
+
+Checking general information...
+Timestamp: 2019-03-22 14:35:08 UTC
+User name: NGC User
+
+Checking API gateway connectivity...
+API Connectivity: SUCCESS
+
+Checking authentication...
+Authentication: SUCCESS
+
+Checking API connectivity (container registry)...
+Container Registry Connectivity: SUCCESS
+
+Checking API connectivity (container registry meta)...
+Container Registry Meta Connectivity: SUCCESS
+
+Checking API connectivity (model registry)...
+Model Registry Connectivity: SUCCESS
+
+Checking data storage connectivity...
+Data storage connectivity: SUCCESS
+
+Checking external IP...
+Global IP Address: 255.255.255.255
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p class="footer">
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-policy/" target="_blank">Privacy Policy</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/privacy-center/" target="_blank">Manage My Privacy</a> |
+<a href="https://www.nvidia.com/en-us/preferences/start/" target="_blank">Do Not Sell or Share My Data</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/terms-of-service/" target="_blank">Terms of Service</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/accessibility/" target="_blank">Accessibility</a> |
+<a href="https://www.nvidia.com/en-us/about-nvidia/company-policies/" target="_blank">Corporate Policies</a> |
+<a href="https://www.nvidia.com/en-us/product-security/" target="_blank">Product Security</a> |
+<a href="https://www.nvidia.com/en-us/contact/" target="_blank">Contact</a>
+</p>
+<p class="copyright">
+  Copyright &copy; 2018-2024, NVIDIA Corporation.
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
