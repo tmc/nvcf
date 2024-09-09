@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/brevdev/nvcf/cmd"
 	"github.com/spf13/cobra"
-	"github.com/tmc/nvcf/cmd"
 )
 
 func main() {
